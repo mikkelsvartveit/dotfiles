@@ -1,0 +1,6 @@
+[user]
+	name = Mikkel Svartveit
+	email = mikkel.svartveit@gmail.com
+[core]
+	excludesfile = /Users/mikkelsvartveit/.gitignore_global
+	editor = nvim
