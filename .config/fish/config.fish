@@ -1,4 +1,4 @@
-alias dotfiles="git --git-dir=$HOME/dotfiles.git/ --work-tree=$HOME"
+alias conf="git --git-dir=$HOME/.myconfig.git/ --work-tree=$HOME"
 alias fixmouse="killall LogiMgrDaemon"
 alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
 alias pi="ssh pi@185.138.33.80 -p 1733"
