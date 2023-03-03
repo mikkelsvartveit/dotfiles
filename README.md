@@ -2,11 +2,12 @@
 
 A small collection of configuration files for macOS, including:
 
-- iTerm2 (terminal emulator)
-- fish (shell)
+- [iTerm2](https://iterm2.com) (terminal emulator)
+- [fish](https://fishshell.com) (shell)
 - Git
 - Neovim (complete development environment with CoC and a bunch of plugins)
 - Vim (simple configuration, no plugins)
+- [Karabiner](https://karabiner-elements.pqrs.org) (for [mapping CapsLock to Ctrl and Esc](https://medium.com/@pechyonkin/how-to-map-capslock-to-control-and-escape-on-mac-60523a64022b))
 - Some wallpapers and custom app icons
 
 ## Setup
