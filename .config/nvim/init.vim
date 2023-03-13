@@ -114,6 +114,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Syntax highlighting for almost every language
 Plug 'sheerun/vim-polyglot'
 
+" Add two-character motions with s and S
+Plug 'ggandor/leap.nvim'
+Plug 'tpope/vim-repeat'
+
+" VSCode-like multi-cursor support
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
 " Easy commenting/uncommenting
 Plug 'numToStr/Comment.nvim'
 
@@ -187,6 +194,9 @@ command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 let g:vim_svelte_plugin_load_full_syntax = 1
 let g:vim_svelte_plugin_use_typescript = 1
 let g:vim_svelte_plugin_use_sass = 1
+
+" Configure leap
+lua require('leap').add_default_mappings()
 
 " Configure Comment.nvim
 lua require('Comment').setup()

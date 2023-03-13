@@ -65,6 +65,10 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 " Fetch plugins with Plug
 call plug#begin()
 
+" Add two-character motions with s and S
+Plug 'ggandor/leap.nvim'
+Plug 'tpope/vim-repeat'
+
 " Easy commenting/uncommenting
 Plug 'numToStr/Comment.nvim'
 
@@ -73,6 +77,9 @@ Plug 'tpope/vim-surround'
 
 " End of plugin fetching
 call plug#end()
+
+" Configure leap
+lua require('leap').add_default_mappings()
 
 " Configure Comment.nvim
 lua require('Comment').setup()
