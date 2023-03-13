@@ -130,9 +130,12 @@ Plug 'tpope/vim-surround'
 " Github Copilot
 Plug 'github/copilot.vim'
 
+" Auto-restore session when opening Neovim
+Plug 'rmagatti/auto-session'
+
 " File explorer sidebar
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
+Plug 'kyazdani42/nvim-tree.lua', { 'commit': 'e14989c' }
 
 " Fuzzy finder for files, buffers, etc. (including dependencies)
 Plug 'nvim-lua/plenary.nvim'
@@ -202,9 +205,14 @@ lua require('leap').add_default_mappings()
 lua require('Comment').setup()
 
 " Disable Github Copilot on launch and configure commands
-autocmd VimEnter * Copilot disable
-command! -nargs=0 CPE :Copilot enable
-command! -nargs=0 CPD :Copilot disable
+autocmd BufRead * let b:copilot_enabled = v:false
+command! -nargs=0 CPE :let b:copilot_enabled = v:true
+command! -nargs=0 CPD :let b:copilot_enabled = v:false
+
+" Configure auto-session
+lua require("auto-session").setup{
+  \ log_level = "error",
+  \ }
 
 " Configure nvim-tree
 let g:loaded_netrw = 1
