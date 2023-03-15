@@ -15,6 +15,10 @@ abbr ghv "gh repo view --web"
 abbr pr "gh pr checkout"
 abbr prc "gh pr create --web"
 
+function ghid
+    gh issue develop $argv[1] --checkout --name $argv[2]
+end
+
 # Print the directory of the top-most Finder window
 function pfd
     bass "echo \"`osascript -e 'tell application \"Finder\" to POSIX path of (insertion location as alias)' end tell`\""
