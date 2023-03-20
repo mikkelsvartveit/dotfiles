@@ -4,7 +4,7 @@ alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
 alias pi="ssh pi@185.138.33.80 -p 1733"
 alias zshrc="nvim ~/.zshrc"
 alias fishconfig="cd ~/.config/fish && nvim config.fish && cd -"
-alias nvimconfig="cd ~/.config/nvim && nvim init.vim && cd -"
+alias nvimconfig="cd ~/.config/nvim && nvim && cd -"
 alias ai="sgpt -se"
 alias y="open -a Yoink"
 
