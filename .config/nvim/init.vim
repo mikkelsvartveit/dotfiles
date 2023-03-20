@@ -86,8 +86,8 @@ au VimLeave * set guicursor=a:ver100
 " Use Bash as shell for internal Vim commands (fish is slow)
 set shell=/bin/bash
 
-" Load plugins from separate file
-lua require("plugins")
-
 " Load default Coc config from separate file
 lua require("coc-defaults")
+
+" Load plugins from separate file
+lua require("plugins")

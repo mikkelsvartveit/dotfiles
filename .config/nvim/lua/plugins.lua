@@ -17,7 +17,6 @@ require("lazy").setup({
   -- Color scheme
   {
     "sonph/onehalf",
-    lazy = false,
     priority = 1000,
     config = function(plugin)
       vim.opt.rtp:append(plugin.dir .. "/vim")
@@ -54,14 +53,13 @@ require("lazy").setup({
     end
   },
 
-  -- Enable dot repeat for plugins
-  {
-    "tpope/vim-repeat",
-  },
-
   -- Add two-character motions with s and S
   {
     "ggandor/leap.nvim",
+    keys = "s",
+    dependencies = {
+      "tpope/vim-repeat",
+    },
     config = function()
       require('leap').add_default_mappings()
     end
@@ -82,6 +80,9 @@ require("lazy").setup({
   -- Easy handling of surroundings
   {
     "tpope/vim-surround",
+    dependencies = {
+      "tpope/vim-repeat",
+    },
   },
 
   -- GitHub Copilot
@@ -138,17 +139,19 @@ require("lazy").setup({
       "nvim-lua/plenary.nvim",
       {"nvim-telescope/telescope-fzf-native.nvim", build = "make"},
     },
+    keys = {
+      {"<leader>p", "<cmd>Telescope find_files<CR>", noremap = true, silent = true},
+      {"<leader>f", "<cmd>Telescope live_grep<CR>", noremap = true, silent = true},
+      {"<leader>b", "<cmd>Telescope buffers<CR>", noremap = true, silent = true},
+      {"<leader>o", "<cmd>Telescope oldfiles<CR>", noremap = true, silent = true},
+      {"<leader>t", "<cmd>Telescope tags<CR>", noremap = true, silent = true},
+      {"<leader>:", "<cmd>Telescope commands<CR>", noremap = true, silent = true},
+      {"<leader>d", "<cmd>Telescope git_status<CR>", noremap = true, silent = true},
+      {"<leader><leader>", "<cmd>Telescope resume<CR>", noremap = true, silent = true},
+    },
     config = function()
       require("telescope").setup{}
       require("telescope").load_extension("fzf")
-      vim.keymap.set("n", "<leader>p", ":Telescope find_files<CR>", { noremap = true, silent = true })
-      vim.keymap.set("n", "<leader>f", ":Telescope live_grep<CR>", { noremap = true, silent = true })
-      vim.keymap.set("n", "<leader>b", ":Telescope buffers<CR>", { noremap = true, silent = true })
-      vim.keymap.set("n", "<leader>o", ":Telescope oldfiles<CR>", { noremap = true, silent = true })
-      vim.keymap.set("n", "<leader>t", ":Telescope tags<CR>", { noremap = true, silent = true })
-      vim.keymap.set("n", "<leader>:", ":Telescope commands<CR>", { noremap = true, silent = true })
-      vim.keymap.set("n", "<leader>d", ":Telescope git_status<CR>", { noremap = true, silent = true })
-      vim.keymap.set("n", "<leader><leader>", ":Telescope resume<CR>", { noremap = true, silent = true })
     end,
   },
 
@@ -171,6 +174,10 @@ require("lazy").setup({
   -- Run code with a keybinding
   {
     "CRAG666/code_runner.nvim",
+    cmd = "RunCode",
+    dependencies = {
+      "akinsho/nvim-toggleterm.lua"
+    },
     opts = {
       mode = "toggleterm",
       filetype = {
