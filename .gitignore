@@ -1,0 +1,16 @@
+# Ignore everything by default
+*
+!*/
+
+# Whitelist certain files and directories
+!.gitignore
+!iterm2-preferences/**/*
+!fish/config.fish
+!git/**/*
+!vim/**/*
+!nvim/**/*
+!vscode-neovim/**/*
+!karabiner/**/*
+
+# Blacklist some stuff again
+.DS_Store
