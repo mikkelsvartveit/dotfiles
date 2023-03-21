@@ -16,12 +16,11 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   -- Color scheme
   {
-    "sonph/onehalf",
+    "catppuccin/nvim",
+    name = "catppuccin",
     priority = 1000,
     config = function(plugin)
-      vim.opt.rtp:append(plugin.dir .. "/vim")
-      vim.opt.termguicolors = true
-      vim.cmd([[colorscheme onehalfdark]])
+      vim.cmd.colorscheme "catppuccin-macchiato"
     end
   },
 
@@ -158,17 +157,17 @@ require("lazy").setup({
   -- Persistent terminal that can be toggled with a keybinding
   {
     "akinsho/nvim-toggleterm.lua",
-    tag = "2.3.0",
+    tag = "2.4.0",
     keys = "<C-j>",
     opts = {
       size = 20,
       hide_numbers = true,
-      direction = 'horizontal',
+      direction = 'float',
       open_mapping = [[<C-j>]],
-      shade_terminals = true,
-      shading_factor = 2,
+      shade_terminals = false,
+      shading_factor = -16,
       shell = 'fish'
-    }
+    },
   },
 
   -- Run code with a keybinding
@@ -221,19 +220,7 @@ require("lazy").setup({
   -- VSCode-like scrollbar with Git and diagnostic markers
   {
     "petertriho/nvim-scrollbar",
-    opts = {
-      marks = {
-        Search = { color = "#ff9e64" },
-        Error = { color = "#db4b4b" },
-        Warn = { color = "#e0af68" },
-        Info = { color = "#0db9d7" },
-        Hint = { color = "#1abc9c" },
-        Misc = { color = "#9d7cd8" },
-        GitAdd = { color = "#9ece6a" },
-        GitChange = { color = "#e0af68" },
-        GitDelete = { color = "#914c54" },
-      }
-    }
+    config = true,
   },
 
   -- Smooth scrolling
