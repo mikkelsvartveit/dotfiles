@@ -3,7 +3,8 @@
 !*/
 
 # Whitelist certain files and directories
-!.gitignore
+!/.gitignore
+!/README.md
 !iterm2-preferences/**/*
 !fish/config.fish
 !git/**/*
