@@ -1,4 +1,3 @@
-alias conf="git --git-dir=$HOME/.myconfig.git/ --work-tree=$HOME"
 alias fixmouse="killall LogiMgrDaemon"
 alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
 alias pi="ssh pi@185.138.33.80 -p 1733"
@@ -6,7 +5,6 @@ alias zshrc="nvim ~/.zshrc"
 alias fishconfig="cd ~/.config/fish && nvim config.fish && cd -"
 alias nvimconfig="cd ~/.config/nvim && nvim && cd -"
 alias ai="sgpt -se"
-alias y="open -a Yoink"
 
 abbr x86 "arch -x86_64"
 abbr f "fuck"
