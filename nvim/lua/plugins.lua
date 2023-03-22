@@ -139,7 +139,7 @@ require("lazy").setup({
       {"nvim-telescope/telescope-fzf-native.nvim", build = "make"},
     },
     keys = {
-      {"<leader>p", "<cmd>Telescope find_files<CR>", noremap = true, silent = true},
+      {"<leader>p", "<cmd>Telescope find_files hidden=true<CR>", noremap = true, silent = true},
       {"<leader>f", "<cmd>Telescope live_grep<CR>", noremap = true, silent = true},
       {"<leader>b", "<cmd>Telescope buffers<CR>", noremap = true, silent = true},
       {"<leader>o", "<cmd>Telescope oldfiles<CR>", noremap = true, silent = true},
@@ -149,7 +149,20 @@ require("lazy").setup({
       {"<leader><leader>", "<cmd>Telescope resume<CR>", noremap = true, silent = true},
     },
     config = function()
-      require("telescope").setup{}
+      require("telescope").setup({
+        defaults = {
+          vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+            "--fixed-strings",
+          }
+        }       
+      })
       require("telescope").load_extension("fzf")
     end,
   },
