@@ -174,18 +174,11 @@ require("lazy").setup({
     keys = "<C-j>",
     config = function()
       require("toggleterm").setup({
-        size = 20,
         hide_numbers = true,
         direction = 'float',
         open_mapping = [[<C-j>]],
-        shade_terminals = false,
-        shading_factor = -16,
         shell = 'fish',
-        on_open = function()
-          vim.keymap.set("n", "<Esc>", ":ToggleTerm<CR>", { buffer = true, silent = true })
-        end,
       })
-      vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
     end,
   },
 
