@@ -35,6 +35,7 @@ require("lazy").setup({
         "coc-tsserver", 
         "@yaegassy/coc-volar", 
         "coc-svelte",
+        "@yaegassy/coc-tailwindcss3",
         "coc-emmet", 
         "coc-prettier", 
         "coc-eslint",
