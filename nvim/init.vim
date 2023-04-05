@@ -23,8 +23,8 @@ set statusline=%f\ %m
 set ignorecase
 set smartcase
 
-" Disable mouse support (to force myself to use the keyboard)
-set mouse=
+" Enable mouse support
+set mouse+=a
 
 " Use 2 spaces as default indentation
 set tabstop=2
