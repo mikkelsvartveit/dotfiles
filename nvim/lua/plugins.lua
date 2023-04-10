@@ -56,7 +56,7 @@ require("lazy").setup({
   -- Add two-character motions with s and S
   {
     "ggandor/leap.nvim",
-    keys = "s",
+    keys = { "s", "S" },
     dependencies = {
       "tpope/vim-repeat",
     },
