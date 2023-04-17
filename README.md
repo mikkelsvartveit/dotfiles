@@ -50,9 +50,9 @@ nvm use --lts
 
 ```bash
 fish
-fish_add_path /opt/homebrew/bin
-echo "/opt/homebrew/bin/fish" | sudo tee -a /etc/shells
-chsh -s /opt/homebrew/bin/fish
+fish_add_path /opt/homebrew/bin # Skip this on Intel Macs
+echo $(which fish) | sudo tee -a /etc/shells
+chsh -s $(which fish)
 curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
 omf install bass
 omf install https://github.com/jhillyerd/plugin-git
