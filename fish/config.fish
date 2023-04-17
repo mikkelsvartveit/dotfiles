@@ -56,8 +56,3 @@ end
 # Allow running pip packages
 export PATH="/Users/mikkelsvartveit/Library/Python/3.9/bin:$PATH"
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-eval /Users/mikkelsvartveit/opt/anaconda3/bin/conda "shell.fish" "hook" $argv | source
-# <<< conda initialize <<<
-
