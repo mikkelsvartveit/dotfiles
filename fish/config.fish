@@ -7,7 +7,6 @@ alias nvimconfig="cd ~/.config/nvim && nvim && cd -"
 alias ai="sgpt -se"
 
 abbr x86 "arch -x86_64"
-abbr f "fuck"
 abbr v "nvim"
 abbr gpf "git push --force-with-lease"
 abbr ghv "gh repo view --web"
@@ -53,9 +52,6 @@ end
 
 # Enable autojump
 [ -f /opt/homebrew/share/autojump/autojump.fish ]; and source /opt/homebrew/share/autojump/autojump.fish
-
-# Initialize fuck
-thefuck --alias | source
 
 # Allow running pip packages
 export PATH="/Users/mikkelsvartveit/Library/Python/3.9/bin:$PATH"

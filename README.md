@@ -38,7 +38,7 @@ echo "source ~/.config/vim/.vimrc" > .vimrc
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install Homebrew packages
-brew install python fish git neovim ripgrep autojump thefuck
+brew install python fish git neovim ripgrep autojump
 
 # Install Node Version Manager and Node
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
