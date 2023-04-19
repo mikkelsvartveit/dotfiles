@@ -12,6 +12,8 @@
 !nvim/**/*
 !vscode-neovim/**/*
 !karabiner/**/*
+!wallpapers/**/*
+!appicons/**/*
 
 # Blacklist some stuff again
 .DS_Store
