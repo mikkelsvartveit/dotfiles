@@ -9,6 +9,7 @@ alias ai="sgpt -se"
 
 abbr x86 "arch -x86_64"
 abbr v "nvim"
+abbr venv "source venv/bin/activate.fish"
 abbr gpf "git push --force-with-lease"
 abbr ghv "gh repo view --web"
 abbr pr "gh pr checkout"
