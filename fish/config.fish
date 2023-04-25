@@ -1,6 +1,7 @@
 alias fixmouse="killall LogiMgrDaemon"
 alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
 alias pi="ssh pi@185.138.33.80 -p 1733"
+alias ubuntu="ssh mikkelsvartveit@34.138.227.57"
 alias zshrc="nvim ~/.zshrc"
 alias fishconfig="cd ~/.config/fish && nvim config.fish && cd -"
 alias nvimconfig="cd ~/.config/nvim && nvim && cd -"

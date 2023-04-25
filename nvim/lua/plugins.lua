@@ -92,6 +92,10 @@ require("lazy").setup({
     config = function()
       vim.api.nvim_create_user_command("CPE", "Copilot enable", {})
       vim.api.nvim_create_user_command("CPD", "Copilot disable", {})
+
+      vim.g.copilot_filetypes = {
+        TelescopePrompt = false,
+      }
     end
   },
 
@@ -140,7 +144,7 @@ require("lazy").setup({
       {"nvim-telescope/telescope-fzf-native.nvim", build = "make"},
     },
     keys = {
-      {"<leader>p", "<cmd>Telescope find_files hidden=true<CR>", noremap = true, silent = true},
+      {"<leader>p", "<cmd>Telescope find_files<CR>", noremap = true, silent = true},
       {"<leader>f", "<cmd>Telescope live_grep<CR>", noremap = true, silent = true},
       {"<leader>b", "<cmd>Telescope buffers<CR>", noremap = true, silent = true},
       {"<leader>o", "<cmd>Telescope oldfiles<CR>", noremap = true, silent = true},
@@ -152,6 +156,11 @@ require("lazy").setup({
     config = function()
       require("telescope").setup({
         defaults = {
+          mappings = {
+            i = {
+              ["<esc>"] = require("telescope.actions").close, -- Disable normal mode
+            },
+          },
           vimgrep_arguments = {
             "rg",
             "--color=never",
