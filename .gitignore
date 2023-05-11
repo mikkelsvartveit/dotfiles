@@ -12,6 +12,7 @@
 !nvim/**/*
 !vscode-neovim/**/*
 !karabiner/**/*
+!raycast-export/**/*
 !wallpapers/**/*
 !appicons/**/*
 
