@@ -204,7 +204,7 @@ require("lazy").setup({
       filetype = {
         python = "python",
         javascript = "node",
-        typescript = "node",
+        typescript = "ts-node --esm",
         c = "gcc -o main % && ./main",
       },
     },
