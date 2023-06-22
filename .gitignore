@@ -11,6 +11,7 @@
 !vim/**/*
 !nvim/**/*
 !vscode-neovim/**/*
+!ideavim/**/*
 !karabiner/**/*
 !raycast-export/**/*
 !raycast-scripts/**/*

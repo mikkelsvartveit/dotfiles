@@ -12,6 +12,7 @@ alias ai="sgpt -se"
 
 abbr x86 "arch -x86_64"
 abbr v "nvim"
+abbr lg "lazygit"
 abbr s "npm run serve"
 abbr d "npm run dev"
 abbr venv "source venv/bin/activate.fish"

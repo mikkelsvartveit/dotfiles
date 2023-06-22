@@ -1,0 +1,38 @@
+let mapleader = ","
+
+" Disable bell sounds
+set visualbell
+
+" Enable relative line numbers
+set number
+set relativenumber
+
+" Show search results as you type
+set incsearch
+
+" Highlight search results
+set hlsearch
+
+" This setting makes search case-insensitive when all characters in the string
+" being searched are lowercase. However, the search becomes case-sensitive if
+" it contains any capital letters. This makes searching more convenient.
+set ignorecase
+set smartcase
+
+" Always show 4 lines above and below the cursor
+set scrolloff=4
+
+" Press Enter to clear search highlighting
+nnoremap <silent><CR> :nohlsearch<CR>
+
+" Allow using uppercase W and Q commands to save/quit
+command WQ wq
+command Wq wq
+command W w
+command Q q
+
+Plug 'preservim/nerdtree'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+
+nnoremap <leader>n :NERDTree<CR>
