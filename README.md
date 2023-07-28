@@ -7,6 +7,7 @@ A small collection of configuration files for macOS, including:
 - Git
 - Neovim (complete development environment with Coc and a bunch of plugins)
 - Vim (simple configuration, no plugins)
+- IdeaVim (Vim emulation for JetBrains IDEs)
 - [Karabiner](https://karabiner-elements.pqrs.org) (for [mapping CapsLock to Ctrl and Esc](https://medium.com/@pechyonkin/how-to-map-capslock-to-control-and-escape-on-mac-60523a64022b))
 - Some wallpapers and custom app icons
 
@@ -27,8 +28,9 @@ git fetch
 git reset --hard origin/main
 git branch --set-upstream-to=origin/main
 
-# Tell Vim to source from the right file
+# Tell Vim and IdeaVim to source from the right file
 echo "source ~/.config/vim/.vimrc" > .vimrc
+echo "source ~/.config/ideavim/.ideavimrc" > .ideavimrc
 ```
 
 #### Install software

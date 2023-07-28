@@ -37,6 +37,7 @@ nnoremap <leader>b <cmd>call VSCodeNotify('workbench.action.showAllEditors')<cr>
 nnoremap <leader>o <cmd>call VSCodeNotify('workbench.action.quickOpen')<cr>
 nnoremap <leader>f <cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>
 nnoremap <leader>: <cmd>call VSCodeNotify('workbench.action.showCommands')<cr>
+nnoremap <leader>c <cmd>call VSCodeNotify('workbench.action.showCommands')<cr>
 nnoremap <leader>d <cmd>call VSCodeNotify('workbench.view.scm')<cr>
 nnoremap <leader>n <cmd>call VSCodeNotify('workbench.action.toggleSidebarVisibility')<cr>
 

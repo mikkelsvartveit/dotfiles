@@ -23,7 +23,7 @@ set smartcase
 set scrolloff=4
 
 " Press Enter to clear search highlighting
-nnoremap <silent><CR> :nohlsearch<CR>
+nmap <CR> :nohlsearch<CR>
 
 " Allow using uppercase W and Q commands to save/quit
 command WQ wq
@@ -31,8 +31,18 @@ command Wq wq
 command W w
 command Q q
 
+" Enable plugins
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 
+" Keymaps
+nnoremap gh :action ShowErrorDescription<CR>
+nnoremap gf :action QuickJavaDoc<CR>
 nnoremap <leader>n :NERDTree<CR>
+nnoremap <leader>c :action GotoAction<CR>
+nnoremap <leader>: :action GotoAction<CR>
+nnoremap <leader>p :action GotoFile<CR>
+nnoremap <leader>o :action RecentFiles<CR>
+nnoremap <leader>f :action FindInPath<CR>
+nnoremap <leader>d :action ActivateCommitToolWindow<CR>

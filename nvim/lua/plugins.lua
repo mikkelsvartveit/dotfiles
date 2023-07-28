@@ -65,12 +65,6 @@ require("lazy").setup({
     end
   },
 
-  -- VSCode-like multi-cursor support
-  {
-    "mg979/vim-visual-multi",
-    branch = "master",
-  },
-
   -- Easy commenting/uncommenting
   {
     "numToStr/Comment.nvim",
@@ -83,6 +77,37 @@ require("lazy").setup({
     dependencies = {
       "tpope/vim-repeat",
     },
+  },
+
+  -- Auto-match brackets, quotes etc.
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {},
+    -- Make it play well with CoC
+    init = function()
+      local remap = vim.api.nvim_set_keymap
+      local npairs = require('nvim-autopairs')
+      npairs.setup({map_cr=false})
+
+      _G.MUtils= {}
+
+      MUtils.completion_confirm=function()
+        if vim.fn["coc#pum#visible"]() ~= 0  then
+            return vim.fn["coc#pum#confirm"]()
+        else
+            return npairs.autopairs_cr()
+        end
+      end
+
+      remap('i' , '<CR>','v:lua.MUtils.completion_confirm()', {expr = true , noremap = true})
+    end
+  },
+
+  -- VSCode-like multi-cursor support
+  {
+    "mg979/vim-visual-multi",
+    branch = "master",
   },
 
   -- GitHub Copilot
@@ -149,6 +174,7 @@ require("lazy").setup({
       {"<leader>b", "<cmd>Telescope buffers<CR>", noremap = true, silent = true},
       {"<leader>o", "<cmd>Telescope oldfiles<CR>", noremap = true, silent = true},
       {"<leader>t", "<cmd>Telescope tags<CR>", noremap = true, silent = true},
+      {"<leader>c", "<cmd>Telescope commands<CR>", noremap = true, silent = true},
       {"<leader>:", "<cmd>Telescope commands<CR>", noremap = true, silent = true},
       {"<leader>d", "<cmd>Telescope git_status<CR>", noremap = true, silent = true},
       {"<leader><leader>", "<cmd>Telescope resume<CR>", noremap = true, silent = true},

@@ -13,11 +13,13 @@ alias ai="sgpt -se"
 abbr x86 "arch -x86_64"
 abbr v "nvim"
 abbr lg "lazygit"
-abbr s "npm run serve"
-abbr d "npm run dev"
+abbr ns "npm start"
+abbr nrs "npm run serve"
+abbr nrd "npm run dev"
+abbr nrw "npm run watch"
+abbr lrr "source venv/bin/activate.fish && litestar run --reload"
 abbr venv "source venv/bin/activate.fish"
 abbr nobrew "HOMEBREW_NO_AUTO_UPDATE=1 brew"
-abbr gpf "git push --force-with-lease"
 abbr ghv "gh repo view --web"
 abbr pr "gh pr checkout"
 abbr prc "gh pr create --web"
@@ -68,3 +70,6 @@ end
 # Allow running pip packages
 export PATH="/Users/mikkelsvartveit/Library/Python/3.9/bin:$PATH"
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/mikkelsvartveit/Applications/google-cloud-sdk/path.fish.inc' ]; . '/Users/mikkelsvartveit/Applications/google-cloud-sdk/path.fish.inc'; end
