@@ -32,6 +32,7 @@ require("lazy").setup({
       vim.g.coc_global_extensions = {
         "coc-pyright", 
         "coc-clangd", 
+        "coc-go",
         "coc-tsserver", 
         "@yaegassy/coc-volar", 
         "coc-svelte",
@@ -40,6 +41,8 @@ require("lazy").setup({
         "coc-prettier", 
         "coc-eslint",
       }
+
+      vim.api.nvim_command("autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')")
     end
   },
 
@@ -232,6 +235,7 @@ require("lazy").setup({
         javascript = "node",
         typescript = "ts-node --esm",
         c = "gcc -o main % && ./main",
+        go = "go run",
       },
     },
     init = function()

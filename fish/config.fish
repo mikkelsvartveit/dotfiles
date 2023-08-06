@@ -17,12 +17,14 @@ abbr ns "npm start"
 abbr nrs "npm run serve"
 abbr nrd "npm run dev"
 abbr nrw "npm run watch"
-abbr lrr "source venv/bin/activate.fish && litestar run --reload"
 abbr venv "source venv/bin/activate.fish"
+abbr lrr "source venv/bin/activate.fish && litestar run --reload"
+abbr gw "gow -e=go,mod,html run ."
 abbr nobrew "HOMEBREW_NO_AUTO_UPDATE=1 brew"
 abbr ghv "gh repo view --web"
 abbr pr "gh pr checkout"
 abbr prc "gh pr create --web"
+abbr gli "nvim (git rev-parse --show-toplevel)/.git/info/exclude"
 abbr cloud-push "rsync -auzP --exclude=.DS_Store '/Volumes/Samsung T7/misvaCloud/' ubuntu@cloud.misva.me:~/misvaCloud/"
 abbr cloud-pull "rsync -auzP --exclude=.DS_Store ubuntu@cloud.misva.me:~/misvaCloud/ '/Volumes/Samsung T7/misvaCloud/'"
 abbr cloud-purge "rsync -auzP --exclude=.DS_Store '/Volumes/Samsung T7/misvaCloud/' ubuntu@cloud.misva.me:~/misvaCloud/ --delete --dry-run"
@@ -68,8 +70,10 @@ end
 [ -f /opt/homebrew/share/autojump/autojump.fish ]; and source /opt/homebrew/share/autojump/autojump.fish
 
 # Allow running pip packages
-export PATH="/Users/mikkelsvartveit/Library/Python/3.9/bin:$PATH"
+export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 
+# Allow running Go packages
+export PATH="$HOME/go/bin:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/mikkelsvartveit/Applications/google-cloud-sdk/path.fish.inc' ]; . '/Users/mikkelsvartveit/Applications/google-cloud-sdk/path.fish.inc'; end

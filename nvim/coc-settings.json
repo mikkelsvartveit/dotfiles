@@ -1,11 +1,14 @@
 {
   "coc.preferences.formatOnSaveFiletypes": [
+    "go",
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact",
     "vue",
     "svelte",
+    "html",
+    "css",
     "json",
     "graphql",
     "markdown"
