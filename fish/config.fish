@@ -12,6 +12,8 @@ alias ai="sgpt -se"
 
 abbr x86 "arch -x86_64"
 abbr v "nvim"
+abbr p "pnpm"
+abbr pd "pnpm dev"
 abbr lg "lazygit"
 abbr ns "npm start"
 abbr nrs "npm run serve"
@@ -28,6 +30,7 @@ abbr gli "nvim (git rev-parse --show-toplevel)/.git/info/exclude"
 abbr cloud-push "rsync -auzP --exclude=.DS_Store '/Volumes/Samsung T7/misvaCloud/' ubuntu@cloud.misva.me:~/misvaCloud/"
 abbr cloud-pull "rsync -auzP --exclude=.DS_Store ubuntu@cloud.misva.me:~/misvaCloud/ '/Volumes/Samsung T7/misvaCloud/'"
 abbr cloud-purge "rsync -auzP --exclude=.DS_Store '/Volumes/Samsung T7/misvaCloud/' ubuntu@cloud.misva.me:~/misvaCloud/ --delete --dry-run"
+abbr 164 "ssh cs164-aiu@eda-3.eecs.berkeley.edu"
 
 function ghid
     gh issue develop $argv[1] --checkout --name $argv[2]
@@ -69,11 +72,14 @@ end
 # Enable autojump
 [ -f /opt/homebrew/share/autojump/autojump.fish ]; and source /opt/homebrew/share/autojump/autojump.fish
 
-# Allow running pip packages
-export PATH="$HOME/Library/Python/3.9/bin:$PATH"
+# opam (OCaml package manager) configuration
+source /Users/mikkelsvartveit/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 
-# Allow running Go packages
-export PATH="$HOME/go/bin:$PATH"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/mikkelsvartveit/Applications/google-cloud-sdk/path.fish.inc' ]; . '/Users/mikkelsvartveit/Applications/google-cloud-sdk/path.fish.inc'; end
+# Update PATH
+fish_add_path "$HOME/.local/bin" # Lingua Franca
+fish_add_path "$HOME/Library/Python/3.9/bin" # Python (pip)
+fish_add_path "$HOME/.bun/bin" # Bun
+fish_add_path "$HOME/Library/pnpm" # Python
+fish_add_path "$HOME/go/bin" # Go
+fish_add_path "$HOME/.cargo/bin" # Rust
+if [ -f "$HOME/Applications/google-cloud-sdk/path.fish.inc" ]; . "$HOME/Applications/google-cloud-sdk/path.fish.inc"; end # Google Cloud SDK
