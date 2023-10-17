@@ -52,8 +52,9 @@ command! -nargs=0 C :e $MYVIMRC
 " Type ':R' to reload config file
 command! -nargs=0 R :source $MYVIMRC
 
-" Save and close all buffers with ZZ
+" Save and close all buffers with ZZ or Ctrl-C
 nnoremap ZZ :wa<CR>:qa<CR>
+nnoremap <C-c> :wa<CR>:qa<CR>
 
 " Exit Terminal mode with Ctrl+k
 tnoremap <C-k> <C-\><C-n>

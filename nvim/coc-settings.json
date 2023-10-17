@@ -7,6 +7,7 @@
     "typescriptreact",
     "vue",
     "svelte",
+    "astro",
     "html",
     "css",
     "json",
@@ -25,7 +26,6 @@
     "typescriptreact",
     "html",
     "vue",
-    "markdown",
     "svelte"
   ],
   "eslint.validate": [
@@ -35,7 +35,6 @@
     "typescriptreact",
     "html",
     "vue",
-    "markdown",
     "svelte"
   ]
 }

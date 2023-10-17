@@ -36,6 +36,7 @@ require("lazy").setup({
         "coc-tsserver", 
         "@yaegassy/coc-volar", 
         "coc-svelte",
+        "@yaegassy/coc-astro",
         "@yaegassy/coc-tailwindcss3",
         "coc-emmet", 
         "coc-prettier", 
@@ -43,6 +44,7 @@ require("lazy").setup({
       }
 
       vim.api.nvim_command("autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')")
+      vim.api.nvim_exec([[autocmd BufNewFile,BufRead *.astro set filetype=astro]], false)
     end
   },
 
@@ -53,6 +55,15 @@ require("lazy").setup({
       vim.g.vim_svelte_plugin_load_full_syntax = 1
       vim.g.vim_svelte_plugin_use_typescript = 1
       vim.g.vim_svelte_plugin_use_sass = 1
+    end
+  },
+
+  -- Support for Astro
+  {
+    "wuelnerdotexe/vim-astro",
+    ft = "astro",
+    init = function()
+      vim.g.astro_typescript = "enable"
     end
   },
 
