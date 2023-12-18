@@ -45,6 +45,7 @@ require("lazy").setup({
 
       vim.api.nvim_command("autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')")
       vim.api.nvim_exec([[autocmd BufNewFile,BufRead *.astro set filetype=astro]], false)
+      -- vim.api.nvim_exec([[autocmd BufNewFile,BufRead *.astro set iskeyword-=-]], false)
     end
   },
 
@@ -154,6 +155,11 @@ require("lazy").setup({
       "kyazdani42/nvim-web-devicons",
     },
     opts = {
+      actions = {
+        open_file = {
+          quit_on_open = true,
+        },
+      },
       update_focused_file = {
         enable = true,
       },
@@ -177,7 +183,7 @@ require("lazy").setup({
   -- Fuzzy finder for files, buffers, etc.
   {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.1",
+    tag = "0.1.4",
     dependencies = {
       "nvim-lua/plenary.nvim",
       {"nvim-telescope/telescope-fzf-native.nvim", build = "make"},
@@ -242,7 +248,7 @@ require("lazy").setup({
     opts = {
       mode = "toggleterm",
       filetype = {
-        python = "python",
+        python = "python3",
         javascript = "node",
         typescript = "ts-node --esm",
         c = "gcc -o main % && ./main",
