@@ -24,7 +24,6 @@
     "javascriptreact",
     "typescript",
     "typescriptreact",
-    "html",
     "vue",
     "svelte"
   ],
@@ -33,7 +32,6 @@
     "javascriptreact",
     "typescript",
     "typescriptreact",
-    "html",
     "vue",
     "svelte"
   ]
