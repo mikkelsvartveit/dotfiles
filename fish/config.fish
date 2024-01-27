@@ -64,12 +64,6 @@ function dq
     osascript -e 'quit app "Docker Desktop"'
 end
 
-# Initialize nvm through bass
-bass source ~/.nvm/nvm.sh ';'
-function nvm
-    bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
-end
-
 # Enable autojump
 [ -f /opt/homebrew/share/autojump/autojump.fish ]; and source /opt/homebrew/share/autojump/autojump.fish
 

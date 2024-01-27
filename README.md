@@ -40,12 +40,15 @@ echo "source ~/.config/ideavim/.ideavimrc" > .ideavimrc
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install Homebrew packages
-brew install python fish git neovim ripgrep autojump
+brew install fish pyenv git neovim ripgrep autojump
 
-# Install Node Version Manager and Node
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-nvm install --lts
-nvm use --lts
+# Install pnpm and Node
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+pnpm env use --global lts
+
+# Install pyenv and Python
+pyenv install 3.12
+pyenv global 3.12
 ```
 
 #### Set up fish shell, oh-my-fish and plugins
