@@ -31,6 +31,7 @@ abbr cloud-push "rsync -auzP --exclude=.DS_Store '/Volumes/Samsung T7/misvaCloud
 abbr cloud-pull "rsync -auzP --exclude=.DS_Store ubuntu@cloud.misva.me:~/misvaCloud/ '/Volumes/Samsung T7/misvaCloud/'"
 abbr cloud-purge "rsync -auzP --exclude=.DS_Store '/Volumes/Samsung T7/misvaCloud/' ubuntu@cloud.misva.me:~/misvaCloud/ --delete --dry-run"
 abbr 164 "ssh cs164-aiu@eda-3.eecs.berkeley.edu"
+abbr caf "caffeinate -d"
 
 function ghid
     gh issue develop $argv[1] --checkout --name $argv[2]
@@ -77,9 +78,18 @@ source /Users/mikkelsvartveit/.opam/opam-init/init.fish > /dev/null 2> /dev/null
 
 # Update PATH
 fish_add_path "$HOME/.local/bin" # Lingua Franca
-fish_add_path "$HOME/Library/Python/3.9/bin" # Python (pip)
 fish_add_path "$HOME/.bun/bin" # Bun
-fish_add_path "$HOME/Library/pnpm" # Python
+fish_add_path "$HOME/.pyenv/bin" # pyenv
+fish_add_path "$HOME/Library/pnpm" # pnpm
 fish_add_path "$HOME/go/bin" # Go
 fish_add_path "$HOME/.cargo/bin" # Rust
 if [ -f "$HOME/Applications/google-cloud-sdk/path.fish.inc" ]; . "$HOME/Applications/google-cloud-sdk/path.fish.inc"; end # Google Cloud SDK
+
+# Initialize pnpm
+set -gx PNPM_HOME "/Users/mikkelsvartveit/Library/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+
+# Initialize pyenv
+pyenv init - | source
