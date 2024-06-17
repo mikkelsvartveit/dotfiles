@@ -82,7 +82,7 @@ nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
 " Fix terminal cursor after exiting
-au VimLeave * set guicursor=a:ver100
+" au VimLeave * set guicursor=a:ver100
 
 " Use Bash as shell for internal Vim commands (fish is slow)
 set shell=/bin/bash

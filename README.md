@@ -47,8 +47,8 @@ curl -fsSL https://get.pnpm.io/install.sh | sh -
 pnpm env use --global lts
 
 # Install pyenv and Python
-pyenv install 3.12
-pyenv global 3.12
+pyenv install 3.11
+pyenv global 3.11
 ```
 
 #### Set up fish shell, oh-my-fish and plugins
