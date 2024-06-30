@@ -1,3 +1,6 @@
+# Disable greeting
+set fish_greeting
+
 alias fixmouse="killall LogiMgrDaemon"
 alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
 alias pi="ssh pi@pi.misva.me -p 1733"
