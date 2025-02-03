@@ -125,18 +125,18 @@ require("lazy").setup({
     branch = "master",
   },
 
-  -- GitHub Copilot
+  -- Supermaven AI assist
   {
-    "github/copilot.vim",
-    cmd = "CPE", -- Don't load until enable command is run
+    "supermaven-inc/supermaven-nvim",
     config = function()
-      vim.api.nvim_create_user_command("CPE", "Copilot enable", {})
-      vim.api.nvim_create_user_command("CPD", "Copilot disable", {})
+      vim.api.nvim_create_user_command("CPE", "SupermavenStart", {})
+      vim.api.nvim_create_user_command("CPD", "SupermavenStop", {})
 
-      vim.g.copilot_filetypes = {
-        TelescopePrompt = false,
-      }
-    end
+      require("supermaven-nvim").setup({})
+
+      -- Disable on startup
+      vim.api.nvim_command("silent! SupermavenStop")
+    end,
   },
 
   -- Auto-restore session when opening Neovim

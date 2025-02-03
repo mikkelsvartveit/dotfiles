@@ -17,14 +17,16 @@ abbr x86 "arch -x86_64"
 abbr v "nvim"
 abbr p "pnpm"
 abbr pd "pnpm dev"
+abbr px "pnpm dlx"
 abbr lg "lazygit"
 abbr ns "npm start"
 abbr nrs "npm run serve"
 abbr nrd "npm run dev"
 abbr nrw "npm run watch"
-abbr venv "source venv/bin/activate.fish"
+abbr venv "source .venv/bin/activate.fish"
 abbr lrr "source venv/bin/activate.fish && litestar run --reload"
 abbr gw "gow -e=go,mod,html run ."
+abbr mw "make watch"
 abbr nobrew "HOMEBREW_NO_AUTO_UPDATE=1 brew"
 abbr ghv "gh repo view --web"
 abbr pr "gh pr checkout"
@@ -90,3 +92,7 @@ end
 
 # Initialize pyenv
 pyenv init - | source
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
