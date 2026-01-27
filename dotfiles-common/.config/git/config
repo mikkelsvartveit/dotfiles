@@ -1,0 +1,27 @@
+[alias]
+	yield = !git pull --rebase --autostash && git push
+	yolofix = !git commit -v -a --no-edit --amend && git push --force-with-lease
+[user]
+	name = Mikkel Svartveit
+	email = mikkel.svartveit@gmail.com
+[core]
+	excludesfile = ~/.config/git/gitignore_global
+	editor = nvim
+  pager = "delta --syntax-theme=ansi --dark"
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false
+[diff "jupyternotebook"]
+	command = git-nbdiffdriver diff
+[merge "jupyternotebook"]
+	driver = git-nbmergedriver merge %O %A %B %L %P
+	name = jupyter notebook merge driver
+[difftool "nbdime"]
+	cmd = git-nbdifftool diff \"$LOCAL\" \"$REMOTE\" \"$BASE\"
+[difftool]
+	prompt = false
+[mergetool "nbdime"]
+	cmd = git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+[mergetool]
+	prompt = false
