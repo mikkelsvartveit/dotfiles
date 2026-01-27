@@ -1,0 +1,29 @@
+{
+  "title": "Fix backtick on ISO keyboard",
+  "rules": [
+    {
+      "description": "Fix backtick on ISO keyboard",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "input_source_if",
+              "input_sources": [
+                {
+                  "language": "en"
+                }
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "non_us_backslash"
+          },
+          "to": {
+            "key_code": "grave_accent_and_tilde"
+          }
+        }
+      ]
+    }
+  ]
+}
