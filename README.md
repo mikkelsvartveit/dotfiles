@@ -14,6 +14,7 @@ A small collection of configuration files, including:
 - [Karabiner](https://karabiner-elements.pqrs.org) (for [mapping CapsLock to Ctrl and Esc](https://medium.com/@pechyonkin/how-to-map-capslock-to-control-and-escape-on-mac-60523a64022b) on macOS)
 - [Raycast](https://www.raycast.com/) (Spotlight replacement for macOS)
 - [BetterMouse](https://better-mouse.com/) (macOS tool for improving mouse support)
+- [Omarchy](https://omarchy.org/) (Linux distro based on Arch and Hyprland)
 - Some wallpapers
 
 ## macOS setup
