@@ -81,7 +81,6 @@ end
 fish_add_path "$HOME/.local/bin"
 fish_add_path "/opt/homebrew/bin" # Homebrew packages
 fish_add_path "$HOME/.bun/bin" # Bun
-fish_add_path "$HOME/.pyenv/bin" # pyenv
 fish_add_path "$HOME/Library/pnpm" # pnpm
 fish_add_path "$HOME/go/bin" # Go
 fish_add_path "$HOME/.cargo/bin" # Rust
@@ -95,9 +94,6 @@ set -gx PNPM_HOME "$HOME/Library/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
   set -gx PATH "$PNPM_HOME" $PATH
 end
-
-# Initialize pyenv
-pyenv init - | source
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
