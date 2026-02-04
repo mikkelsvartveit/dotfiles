@@ -78,6 +78,41 @@ function dq
     osascript -e 'quit app "OrbStack"'
 end
 
+# Function for downloading with wget with staging area
+function dl
+    # 1. Create a unique, hidden temp dir in the current directory
+    set -l tmp_dir (mktemp -d -p . ".wget_staging_XXXXXX")
+
+    # Check if directory creation succeeded
+    if test $status -ne 0
+        echo "Error: Could not create temporary directory."
+        return 1
+    end
+
+    echo "Downloading to hidden staging area: $tmp_dir"
+
+    # 2. Loop through each URL passed as an argument
+    for url in $argv
+        # Run wget for the specific URL
+        if wget --content-disposition -P "$tmp_dir" $url
+            # 3. Atomic move to current directory immediately after this specific download finishes
+            # Check if there are files to move to avoid errors if wget succeeded but wrote no file
+            if count "$tmp_dir"/* > /dev/null
+                mv "$tmp_dir"/* .
+                echo "Success: File(s) from $url moved to current directory."
+            end
+        else
+            echo "Error: Download failed for $url."
+        end
+    end
+
+    # 4. Cleanup: Remove the temp dir
+    rm -rf "$tmp_dir"
+
+    # 5. Quit tmux session
+    exit
+end
+
 # Update PATH
 fish_add_path "$HOME/.local/bin"
 fish_add_path "/opt/homebrew/bin" # Homebrew packages
