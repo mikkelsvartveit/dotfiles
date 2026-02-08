@@ -25,6 +25,7 @@ abbr v "vim"
 abbr n "nvim"
 abbr c "claude"
 abbr oc "opencode"
+abbr occ "opencode"
 abbr ws "windsurf"
 abbr lg "lazygit"
 abbr p "pnpm"
@@ -122,7 +123,6 @@ fish_add_path "$HOME/go/bin" # Go
 fish_add_path "$HOME/.cargo/bin" # Rust
 fish_add_path "$HOME/.codeium/windsurf/bin" # Windsurf
 fish_add_path "/opt/homebrew/opt/libpq/bin" # libpg (Postgres CLI tools)
-fish_add_path "$HOME/.opencode/bin" # opencode
 if [ -f "$HOME/Applications/google-cloud-sdk/path.fish.inc" ]; . "$HOME/Applications/google-cloud-sdk/path.fish.inc"; end # Google Cloud SDK
 
 # Initialize pnpm
@@ -141,4 +141,3 @@ source ~/.orbstack/shell/init2.fish 2>/dev/null || :
 
 # Initialize zoxide
 zoxide init fish --cmd j | source
-
