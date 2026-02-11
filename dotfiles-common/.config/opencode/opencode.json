@@ -1,15 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "permission": {
-    "bash": {
-      "*": "ask",
-      "cd *": "allow",
-      "ls *": "allow",
-      "head *": "allow",
-      "mkdir *": "allow",
-      "pnpm *": "allow"
-    }
-  },
+  "model": "github-copilot/claude-sonnet-4.5",
   "mcp": {
     "context7": {
       "type": "remote",

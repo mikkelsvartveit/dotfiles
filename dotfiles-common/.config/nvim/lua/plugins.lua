@@ -210,6 +210,7 @@ require("lazy").setup({
 			vim.g.opencode_opts = {
 				-- Your configuration, if any — see `lua/opencode/config.lua`
 				provider = {
+					cmd = "opencode --model opencode/kimi-k2.5-free --port",
 					snacks = {
 						win = {
 							enter = true,
