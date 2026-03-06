@@ -159,8 +159,8 @@ automatically-unhide-macos-hidden-apps = true
     alt-shift-a = 'exec-and-forget open -a Gemini'
     alt-shift-ctrl-a = 'exec-and-forget open -a Claude'
     alt-shift-g = 'exec-and-forget open -a Signal'
-    alt-shift-ctrl-g = 'exec-and-forget open -a Messages'
-    alt-shift-cmd-g = 'exec-and-forget open -a Messenger'
+    alt-shift-ctrl-g = 'exec-and-forget open -a "Beeper Desktop"'
+    # alt-shift-cmd-g = 'exec-and-forget open -a Messenger'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -205,6 +205,6 @@ automatically-unhide-macos-hidden-apps = true
     run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id = 'com.google.Chrome.app.bbdeiblfgdokhlblpgeaokenkfknecgl' # Messenger
+    if.app-id = 'com.automattic.beeper.desktop'
     run = 'layout floating'
 
