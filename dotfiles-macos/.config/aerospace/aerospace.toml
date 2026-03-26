@@ -5,7 +5,7 @@ config-version = 2
 after-startup-command = []
 
 # Start AeroSpace at login
-start-at-login = true
+start-at-login = false
 
 # Auto-reload config on save
 # auto-reload-config = true
@@ -46,12 +46,12 @@ automatically-unhide-macos-hidden-apps = true
 
 # See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-    inner.horizontal = 6
-    inner.vertical =   6
-    outer.left =       6
-    outer.bottom =     5
-    outer.top =        1
-    outer.right =      6
+    inner.horizontal = 0
+    inner.vertical =   0
+    outer.left =       0
+    outer.bottom =     0
+    outer.top =        0
+    outer.right =      0
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -156,8 +156,8 @@ automatically-unhide-macos-hidden-apps = true
     alt-shift-t = 'exec-and-forget open -a TickTick'
     alt-shift-m = 'exec-and-forget open -a Music'
     alt-shift-p = 'exec-and-forget open -a 1Password'
-    alt-shift-a = 'exec-and-forget open -a Gemini'
-    alt-shift-ctrl-a = 'exec-and-forget open -a Claude'
+    alt-shift-a = 'exec-and-forget open -a ChatGPT'
+    alt-shift-ctrl-a = 'exec-and-forget open -a Gemini'
     alt-shift-g = 'exec-and-forget open -a Signal'
     alt-shift-ctrl-g = 'exec-and-forget open -a "Beeper Desktop"'
     # alt-shift-cmd-g = 'exec-and-forget open -a Messenger'

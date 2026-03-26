@@ -7,6 +7,8 @@ set theme_short_path yes
 # Use Neovim as the default text editor
 set -x EDITOR "nvim"
 
+export XDG_CONFIG_HOME="$HOME/.config"
+
 alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
 alias mcloud-push="rsync -auzP --exclude='.*' /Volumes/mcloud/ mcloud:./"
 alias mcloud-pull="rsync -auzP --exclude='.*' mcloud:./ /Volumes/mcloud/"
@@ -14,6 +16,7 @@ alias mcloud-status="mcloud-push --dry-run && mcloud-pull --dry-run"
 alias mcloud-sync="mcloud-push && mcloud-pull"
 alias mcloud-photos-pull="pnpm dlx icloudpd --directory '/Volumes/mcloud/Backup/iCloud Photos (all)/' --username mikkel.svartveit@gmail.com --until-found 100"
 alias mcloud-developer-dump="cd ~/Developer/ && fd --type f --hidden --exclude .git --exclude node_modules | zip -@ /Volumes/mcloud/Backup/Developer/Developer-$(date +%Y-%m-%d).zip"
+alias mcloud-openclaw-dump='set f openclaw-(date +%F).tar.gz; ssh edvin "tar -czf /tmp/$f -C ~ .openclaw"; and scp "edvin:/tmp/$f" "/Volumes/mcloud/Backup/OpenClaw/"; and ssh edvin "rm /tmp/$f"'
 alias zshrc="nvim ~/.zshrc"
 alias fishconfig="cd ~/.config/fish && nvim config.fish && cd -"
 alias nvimconfig="cd ~/.config/nvim && nvim && cd -"
@@ -23,7 +26,7 @@ abbr e "exit"
 abbr t "tmux"
 abbr v "vim"
 abbr n "nvim"
-abbr c "claude"
+abbr cc "claude"
 abbr oc "opencode"
 abbr occ "opencode --continue"
 abbr ws "windsurf"
@@ -114,6 +117,38 @@ function dl
     exit
 end
 
+function mp3combine --description "Combine all MP3 files in the current directory into one MP3"
+    set -l output "combined.mp3"
+
+    if test (count $argv) -ge 1
+        set output $argv[1]
+    end
+
+    set -l files *.mp3
+
+    if test "$files" = "*.mp3"
+        echo "No MP3 files found in the current directory."
+        return 1
+    end
+
+    if not command -sq ffmpeg
+        echo "ffmpeg is required but not installed."
+        return 1
+    end
+
+    set -l listfile (mktemp)
+
+    for file in $files
+        printf "file '%s'\n" (string replace -a "'" "'\\''" -- "$file") >> $listfile
+    end
+
+    ffmpeg -f concat -safe 0 -i $listfile -c copy $output
+
+    set -l status_code $status
+    rm -f $listfile
+    return $status_code
+end
+
 # Update PATH
 fish_add_path "$HOME/.local/bin"
 fish_add_path "/opt/homebrew/bin" # Homebrew packages
@@ -141,3 +176,10 @@ source ~/.orbstack/shell/init2.fish 2>/dev/null || :
 
 # Initialize zoxide
 zoxide init fish --cmd j | source
+
+# pnpm
+set -gx PNPM_HOME "/Users/mikkelsvartveit/Library/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end

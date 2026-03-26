@@ -7,7 +7,7 @@
 [core]
 	excludesfile = ~/.config/git/gitignore_global
 	editor = nvim
-  pager = "delta --syntax-theme=ansi --dark"
+  pager = "delta --syntax-theme=ansi --dark --tabs 4"
 [init]
 	defaultBranch = main
 [pull]
