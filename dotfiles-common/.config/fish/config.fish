@@ -154,6 +154,7 @@ end
 
 # Update PATH
 fish_add_path "$HOME/.local/bin"
+fish_add_path "$HOME/.local/bin/nvim-macos-arm64/bin" # Neovim
 fish_add_path "/opt/homebrew/bin" # Homebrew packages
 fish_add_path "$HOME/.bun/bin" # Bun
 fish_add_path "$HOME/Library/pnpm" # pnpm

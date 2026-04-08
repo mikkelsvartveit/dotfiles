@@ -25,7 +25,7 @@ require("lazy").setup({
 				term_colors = true,
 				auto_integrations = true,
 			})
-			vim.cmd.colorscheme("catppuccin-macchiato")
+			vim.cmd.colorscheme("catppuccin-mocha")
 			vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
 			vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
 		end,

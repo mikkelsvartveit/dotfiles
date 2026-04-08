@@ -1,0 +1,8 @@
+theme = Catppuccin Mocha
+window-padding-x = 6
+font-family = FiraCode Nerd Font
+font-size = 14
+font-thicken = true
+adjust-cell-height = 30%
+shell-integration-features = no-cursor
+cursor-style-blink = false
