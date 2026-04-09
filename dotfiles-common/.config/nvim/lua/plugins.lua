@@ -200,6 +200,51 @@ require("lazy").setup({
 		end,
 	},
 
+	{
+		"NickvanDyke/opencode.nvim",
+		dependencies = {
+			-- Recommended for better prompt input, and required to use `opencode.nvim`'s embedded terminal — otherwise optional
+			{ "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
+		},
+		config = function()
+			vim.g.opencode_opts = {
+				-- Your configuration, if any — see `lua/opencode/config.lua`
+				provider = {
+					cmd = "opencode --port",
+					snacks = {
+						win = {
+							enter = true,
+						},
+					},
+				},
+			}
+
+			-- Required for `opts.auto_reload`
+			vim.opt.autoread = true
+
+			-- Toggle with Ctrl + ,
+			vim.keymap.set({ "n", "v", "i", "t" }, "<C-,>", function()
+				require("opencode").toggle()
+			end, { desc = "Toggle" })
+
+			-- Ask inline with <leader>aa
+			vim.keymap.set("n", "<leader>aa", function()
+				require("opencode").ask("@this: ", { submit = true })
+			end, { desc = "Ask about this" })
+			vim.keymap.set("v", "<leader>aa", function()
+				require("opencode").ask("@this: ", { submit = true })
+			end, { desc = "Ask about selection" })
+
+			-- Add to context with <leader>a+
+			vim.keymap.set("n", "<leader>a+", function()
+				require("opencode").prompt("@buffer")
+			end, { desc = "Add buffer to prompt" })
+			vim.keymap.set("v", "<leader>a+", function()
+				require("opencode").prompt("@this")
+			end, { desc = "Add selection to prompt" })
+		end,
+	},
+
 	-- Auto-restore session when opening Neovim
 	{
 		"rmagatti/auto-session",
@@ -350,6 +395,21 @@ require("lazy").setup({
 			easing_function = "sine",
 		},
 	},
+})
+
+-- Update buffer when embedded terminal has made changes
+vim.api.nvim_create_autocmd({
+	"BufEnter",
+	"BufWinEnter",
+}, {
+	group = augroup,
+	pattern = "*",
+	callback = function()
+		if vim.fn.filereadable(vim.fn.expand("%")) == 1 then
+			vim.cmd("checktime")
+		end
+	end,
+	desc = "Check for file changes on disk",
 })
 
 -- Make system clipboard work over SSH
