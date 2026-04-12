@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "github-copilot/gpt-5.3-codex",
+  "model": "github-copilot/gpt-5.4",
   "lsp": false,
   "mcp": {
     "context7": {
