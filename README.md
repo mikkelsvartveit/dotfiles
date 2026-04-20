@@ -44,7 +44,7 @@ git stash -u
 
 ```bash
 # Install Homebrew packages
-brew install fish tmux git neovim ripgrep zoxide fzf fd
+brew install fish tmux git neovim ripgrep tree-sitter-cli zoxide fzf fd
 
 # Install pnpm, Node, and Bun
 curl -fsSL https://get.pnpm.io/install.sh | sh -

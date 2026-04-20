@@ -79,5 +79,8 @@ xnoremap <expr> gP (v:register ==# '"' ? '"+' : '') . 'P'
 " Use Bash as shell for internal Vim commands (fish is slow)
 set shell=/bin/bash
 
+" Load Lua config from separate file
+lua require("config")
+
 " Load plugins from separate file
 lua require("plugins")

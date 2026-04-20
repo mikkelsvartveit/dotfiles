@@ -33,17 +33,11 @@ require("lazy").setup({
 
 	-- Treesitter config
 	{
-		"nvim-treesitter/nvim-treesitter",
-		branch = "master",
-		lazy = false,
-		build = ":TSUpdate",
+		"romus204/tree-sitter-manager.nvim",
+		dependencies = {}, -- tree-sitter CLI must be installed system-wide
 		config = function()
-			require("nvim-treesitter.configs").setup({
+			require("tree-sitter-manager").setup({
 				auto_install = true,
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = false,
-				},
 			})
 		end,
 	},
@@ -114,9 +108,6 @@ require("lazy").setup({
 
 					vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
 					vim.keymap.set("n", "gh", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
-					vim.keymap.set("n", "grr", "<cmd>Telescope lsp_references<cr>", opts)
-					vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
-					vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
 				end,
 			})
 
@@ -272,7 +263,6 @@ require("lazy").setup({
 	-- File explorer sidebar
 	{
 		"kyazdani42/nvim-tree.lua",
-		-- commit = "e14989c", -- newer versions break auto-session
 		dependencies = {
 			"kyazdani42/nvim-web-devicons",
 		},
@@ -288,11 +278,6 @@ require("lazy").setup({
 			view = {
 				signcolumn = "auto",
 				adaptive_size = true,
-				-- mappings = {
-				-- 	list = {
-				-- 		{ key = "+", action = "cd" },
-				-- 	},
-				-- },
 			},
 		},
 		init = function()
@@ -305,7 +290,7 @@ require("lazy").setup({
 	-- Fuzzy finder for files, buffers, etc.
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.8",
+		tag = "v0.2.1",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -320,6 +305,7 @@ require("lazy").setup({
 			{ "<leader>:", "<cmd>Telescope commands<CR>", noremap = true, silent = true },
 			{ "<leader>d", "<cmd>Telescope git_status<CR>", noremap = true, silent = true },
 			{ "<leader><leader>", "<cmd>Telescope resume<CR>", noremap = true, silent = true },
+			{ "grr", "<cmd>Telescope lsp_references<CR>", noremap = true, silent = true },
 		},
 		config = function()
 			require("telescope").setup({
@@ -409,31 +395,3 @@ require("lazy").setup({
 		},
 	},
 })
-
--- Update buffer when embedded terminal has made changes
-vim.api.nvim_create_autocmd({
-	"BufEnter",
-	"BufWinEnter",
-}, {
-	group = augroup,
-	pattern = "*",
-	callback = function()
-		if vim.fn.filereadable(vim.fn.expand("%")) == 1 then
-			vim.cmd("checktime")
-		end
-	end,
-	desc = "Check for file changes on disk",
-})
-
--- Make system clipboard work over SSH
-vim.g.clipboard = {
-	name = "OSC 52",
-	copy = {
-		["+"] = require("vim.ui.clipboard.osc52").copy("+"),
-		["*"] = require("vim.ui.clipboard.osc52").copy("*"),
-	},
-	paste = {
-		["+"] = require("vim.ui.clipboard.osc52").paste("+"),
-		["*"] = require("vim.ui.clipboard.osc52").paste("*"),
-	},
-}
