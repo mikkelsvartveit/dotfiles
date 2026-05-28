@@ -98,18 +98,15 @@ function dl
         # Run wget for the specific URL
         if wget --content-disposition -P "$tmp_dir" "$url"
             # 3. Atomic move to current directory immediately after this specific download finishes
-            # Check if there are files to move to avoid errors if wget succeeded but wrote no file
-            if count "$tmp_dir"/* > /dev/null
-                mv "$tmp_dir"/* .
-                echo "Success: File(s) from $url moved to current directory."
-            end
+            mv "$tmp_dir"/* .
+            echo "Success: File(s) from $url moved to current directory."
         else
             echo "Error: Download failed for $url."
         end
     end
 
     # 4. Cleanup: Remove the temp dir
-    rm -rf "$tmp_dir"
+    rm -r "$tmp_dir"
 
     # 5. Quit tmux session
     exit
