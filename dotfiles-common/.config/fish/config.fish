@@ -23,13 +23,15 @@ alias nvimconfig="cd ~/.config/nvim && nvim && cd -"
 alias asconfig="cd ~/.config/aerospace && nvim aerospace.toml && cd -"
 
 abbr e "exit"
-abbr t "tmux"
 abbr v "vim"
 abbr n "nvim"
 abbr s "ssh"
+abbr t "tmux"
+abbr ta "tmux a"
 abbr cc "claude"
 abbr oc "opencode"
 abbr occ "opencode --continue"
+abbr ocr "opencode run"
 abbr ws "windsurf"
 abbr lg "lazygit"
 abbr p "pnpm"
@@ -52,26 +54,12 @@ abbr pr "gh pr checkout"
 abbr prc "gh pr create --web"
 abbr caf "caffeinate -d"
 
-function ghid
-    gh issue develop $argv[1] --checkout --name $argv[2]
-end
-
-# Print the directory of the top-most Finder window
-function pfd
-    bass "echo \"`osascript -e 'tell application \"Finder\" to POSIX path of (insertion location as alias)' end tell`\""
-end
-
-# cd to the directory of the top-most Finder window
-function cdf
-    cd $(pfd)
-end
-
 # Open a file with macOS Quick Look
 function ql
     qlmanage -p $argv >/dev/null &
 end
 
-# Start Docker Desktop and wait to ensure the daemon is ready
+# Start Orbstack and wait to ensure the daemon is ready
 function ds
     echo "Launching Docker Daemon..."
     open --hide -a "Orbstack"
@@ -81,6 +69,10 @@ end
 
 function dq
     osascript -e 'quit app "OrbStack"'
+end
+
+function quote
+    string split \n -- $argv | string match -r '\S+' | string replace -r '^(.*)$' '"$1"' | string join ' '
 end
 
 # Function for downloading with wget with staging area
@@ -96,10 +88,15 @@ function dl
 
     echo "Downloading to hidden staging area: $tmp_dir"
 
-    # 2. Loop through each URL passed as an argument
-    for url in $argv
+    # 2. Loop through each URL passed as an argument, allowing space-separated URLs in one argument
+    set -l urls
+    for arg in $argv
+        set -a urls (string split -n ' ' -- $arg)
+    end
+
+    for url in $urls
         # Run wget for the specific URL
-        if wget --content-disposition -P "$tmp_dir" $url
+        if wget --content-disposition -P "$tmp_dir" "$url"
             # 3. Atomic move to current directory immediately after this specific download finishes
             # Check if there are files to move to avoid errors if wget succeeded but wrote no file
             if count "$tmp_dir"/* > /dev/null
