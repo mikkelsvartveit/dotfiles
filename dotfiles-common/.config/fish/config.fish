@@ -96,7 +96,7 @@ function dl
 
     for url in $urls
         # Run wget for the specific URL
-        if wget --content-disposition -P "$tmp_dir" "$url"
+        if wget --content-disposition --retry-on-http-error=429 -P "$tmp_dir" "$url"
             # 3. Atomic move to current directory immediately after this specific download finishes
             mv "$tmp_dir"/* .
             echo "Success: File(s) from $url moved to current directory."
@@ -107,6 +107,46 @@ function dl
 
     # 4. Cleanup: Remove the temp dir
     rm -r "$tmp_dir"
+
+    # 5. Quit tmux session
+    exit
+end
+
+# Function for recursively downloading with wget without ascending to parent directories
+function dlr
+    # 1. Create a unique, hidden temp dir in the current directory
+    set -l tmp_dir (mktemp -d -p . ".wget_staging_XXXXXX")
+
+    # Check if directory creation succeeded
+    if test $status -ne 0
+        echo "Error: Could not create temporary directory."
+        return 1
+    end
+
+    echo "Downloading recursively to hidden staging area: $tmp_dir"
+
+    # 2. Loop through each URL passed as an argument, allowing common separators in one argument
+    set -l urls
+    for arg in $argv
+        set -a urls (string match -ar '[^[:space:],;]+' -- $arg)
+    end
+
+    for url in $urls
+        # Run wget recursively for MKV files without ascending to parent directories
+        if wget -r -np -A mkv --content-disposition --retry-on-http-error=429 -P "$tmp_dir" "$url"
+            # 3. Atomic move to current directory immediately after this specific download finishes
+            # Check if there are files to move to avoid errors if wget succeeded but wrote no file
+            if count "$tmp_dir"/* > /dev/null
+                mv "$tmp_dir"/* .
+                echo "Success: File(s) from $url moved to current directory."
+            end
+        else
+            echo "Error: Download failed for $url."
+        end
+    end
+
+    # 4. Cleanup: Remove the temp dir
+    rm -rf "$tmp_dir"
 
     # 5. Quit tmux session
     exit
