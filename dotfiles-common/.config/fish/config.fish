@@ -88,10 +88,10 @@ function dl
 
     echo "Downloading to hidden staging area: $tmp_dir"
 
-    # 2. Loop through each URL passed as an argument, allowing space-separated URLs in one argument
+    # 2. Loop through each URL passed as an argument, allowing common separators in one argument
     set -l urls
     for arg in $argv
-        set -a urls (string split -n ' ' -- $arg)
+        set -a urls (string match -ar '[^[:space:],;]+' -- $arg)
     end
 
     for url in $urls
