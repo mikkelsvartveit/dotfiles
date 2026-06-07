@@ -21,13 +21,13 @@ require("lazy").setup({
 		priority = 1000,
 		config = function(plugin)
 			require("catppuccin").setup({
-				transparent_background = true,
-				term_colors = true,
 				auto_integrations = true,
+				transparent_background = true, -- disables setting the background color.
+				float = {
+					transparent = true, -- enable transparent floating windows
+				},
 			})
-			vim.cmd.colorscheme("catppuccin-mocha")
-			vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
-			vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
+			vim.cmd("colorscheme catppuccin-mocha")
 		end,
 	},
 
