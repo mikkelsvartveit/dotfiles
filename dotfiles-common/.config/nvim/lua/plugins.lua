@@ -84,15 +84,6 @@ require("lazy").setup({
 
 					-- Ctrl + space triggers LSP completion menu
 					["<C-Space>"] = cmp.mapping.complete(),
-
-					-- Ctrl + a triggers AI autocompletion
-					["<C-a>"] = cmp.mapping.complete({
-						config = {
-							sources = {
-								{ name = "supermaven" },
-							},
-						},
-					}),
 				}),
 				snippet = {
 					expand = function(args)
@@ -171,22 +162,58 @@ require("lazy").setup({
 	},
 
 	-- Auto-match brackets, quotes etc.
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		opts = {},
-	},
+	{ "nvim-mini/mini.pairs", opts = {}, version = "*" },
 
 	-- AI autocompletion
 	{
-		"supermaven-inc/supermaven-nvim",
+		"monkoose/neocodeium",
+		event = "VeryLazy",
 		init = function()
-			vim.api.nvim_create_user_command("CPE", "SupermavenStart", {})
-			vim.api.nvim_create_user_command("CPD", "SupermavenStop", {})
+			vim.api.nvim_create_user_command("CPE", "NeoCodeium enable", {})
+			vim.api.nvim_create_user_command("CPD", "NeoCodeium disable", {})
 		end,
 		config = function()
-			require("supermaven-nvim").setup({
-				disable_inline_completion = true,
+			local neocodeium = require("neocodeium")
+
+			neocodeium.setup({
+				enabled = true,
+				manual = true,
+				filter = function(bufnr)
+					if vim.endswith(vim.api.nvim_buf_get_name(bufnr), ".env") then
+						return false
+					end
+					return true
+				end,
+			})
+
+			-- Trigger AI suggestion manually
+			vim.keymap.set("i", "<C-a>", function()
+				neocodeium.cycle_or_complete()
+			end)
+
+			-- Accept AI suggestion, or insert a normal Tab if none is visible
+			vim.keymap.set("i", "<Tab>", function()
+				if neocodeium.visible() then
+					neocodeium.accept()
+				else
+					vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+				end
+			end)
+
+			-- Accept word or line of the AI suggestion
+			vim.keymap.set("i", "<C-k>", function()
+				neocodeium.accept_word()
+			end)
+			vim.keymap.set("i", "<C-l>", function()
+				neocodeium.accept_line()
+			end)
+
+			-- Close nvim-cmp when NeoCodeium completions are displayed
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "NeoCodeiumCompletionDisplayed",
+				callback = function()
+					require("cmp").abort()
+				end,
 			})
 		end,
 	},
