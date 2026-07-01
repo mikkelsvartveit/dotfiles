@@ -51,6 +51,15 @@ require("lazy").setup({
 			{
 				"mason-org/mason-lspconfig.nvim",
 				opts = {
+					ensure_installed = {
+						"ts_ls",
+						"svelte",
+						"astro",
+						"tailwindcss",
+						"emmet_ls",
+						"pyright",
+						"gopls",
+					},
 					handlers = {
 						-- Make it play with nvim-cmp
 						function(server_name)
@@ -62,8 +71,7 @@ require("lazy").setup({
 				},
 			},
 
-			-- Autocompletion (nvim-cmp)
-			"hrsh7th/nvim-cmp",
+			"hrsh7th/nvim-cmp", -- Autocompletion (nvim-cmp)
 			"hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
 			"L3MON4D3/LuaSnip", -- Snippet engine
 		},
@@ -110,41 +118,50 @@ require("lazy").setup({
 		end,
 	},
 
-	-- Formatting with null-ls
+	-- Formatting with none-ls
 	{
-		"nvimtools/none-ls.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		config = function()
-			local null_ls = require("null-ls")
-			local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-			null_ls.setup({
-				sources = {
-					null_ls.builtins.formatting.prettierd.with({
-						extra_filetypes = { "astro", "svelte" },
-					}),
-					null_ls.builtins.formatting.black,
-					null_ls.builtins.formatting.stylua,
-					null_ls.builtins.formatting.gofmt,
-				},
-				on_attach = function(client, bufnr)
-					if client:supports_method("textDocument/formatting") then
-						vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-						vim.api.nvim_create_autocmd("BufWritePre", {
-							group = augroup,
-							buffer = bufnr,
-							callback = function()
-								vim.lsp.buf.format({
-									async = false,
-									filter = function(client)
-										return client.name == "null-ls"
+		"jay-babu/mason-null-ls.nvim", -- For auto-installing formatters/linters through Mason
+		dependencies = {
+			"mason-org/mason.nvim",
+			{
+				"nvimtools/none-ls.nvim",
+				dependencies = { "nvim-lua/plenary.nvim" },
+				config = function()
+					local null_ls = require("null-ls")
+					local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+					null_ls.setup({
+						sources = {
+							null_ls.builtins.formatting.prettierd.with({
+								extra_filetypes = { "astro", "svelte" },
+							}),
+							null_ls.builtins.formatting.black,
+							null_ls.builtins.formatting.stylua,
+							null_ls.builtins.formatting.gofmt,
+						},
+						on_attach = function(client, bufnr)
+							if client:supports_method("textDocument/formatting") then
+								vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+								vim.api.nvim_create_autocmd("BufWritePre", {
+									group = augroup,
+									buffer = bufnr,
+									callback = function()
+										vim.lsp.buf.format({
+											async = false,
+											filter = function(client)
+												return client.name == "null-ls"
+											end,
+										})
 									end,
 								})
-							end,
-						})
-					end
+							end
+						end,
+					})
 				end,
-			})
-		end,
+			},
+		},
+		opts = {
+			automatic_installation = true,
+		},
 	},
 
 	-- Easy commenting/uncommenting
@@ -178,6 +195,7 @@ require("lazy").setup({
 			neocodeium.setup({
 				enabled = true,
 				manual = true,
+				silent = true,
 				filter = function(bufnr)
 					if vim.endswith(vim.api.nvim_buf_get_name(bufnr), ".env") then
 						return false
