@@ -19,7 +19,7 @@ require("lazy").setup({
 		"catppuccin/nvim",
 		name = "catppuccin",
 		priority = 1000,
-		config = function(plugin)
+		config = function()
 			require("catppuccin").setup({
 				auto_integrations = true,
 				transparent_background = true, -- disables setting the background color.
@@ -37,7 +37,7 @@ require("lazy").setup({
 		dependencies = {}, -- tree-sitter CLI must be installed system-wide
 		config = function()
 			require("tree-sitter-manager").setup({
-				auto_install = true,
+				auto_install = true, -- Auto-install parsers when opening file
 			})
 		end,
 	},
@@ -48,63 +48,37 @@ require("lazy").setup({
 		dependencies = {
 			-- Mason for easy LSP installation
 			{ "mason-org/mason.nvim", opts = {} },
+
+			-- Auto-enables installed LSP servers (installed by mason-tool-installer below)
+			{ "mason-org/mason-lspconfig.nvim", opts = {} },
+
+			-- Provides LSP-powered autocompletion
 			{
-				"mason-org/mason-lspconfig.nvim",
+				"saghen/blink.cmp",
+				version = "*",
 				opts = {
-					ensure_installed = {
-						"ts_ls",
-						"svelte",
-						"astro",
-						"tailwindcss",
-						"emmet_ls",
-						"pyright",
-						"gopls",
-					},
-					handlers = {
-						-- Make it play with nvim-cmp
-						function(server_name)
-							require("lspconfig")[server_name].setup({
-								capabilities = require("cmp_nvim_lsp").default_capabilities(),
-							})
-						end,
+					snippets = { preset = "default" },
+					sources = { default = { "lsp", "path", "snippets", "buffer" } },
+					signature = { enabled = true },
+					keymap = {
+						preset = "default",
+						["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
+						["<CR>"] = { "select_and_accept", "fallback" },
 					},
 				},
 			},
-
-			"hrsh7th/nvim-cmp", -- Autocompletion (nvim-cmp)
-			"hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
-			"L3MON4D3/LuaSnip", -- Snippet engine
 		},
 		config = function()
-			-- Setup nvim-cmp
-			local cmp = require("cmp")
-			cmp.setup({
-				sources = {
-					{ name = "nvim_lsp" },
-				},
-				completion = {
-					-- Highlight first item in completion menu automatically
-					completeopt = "menu,menuone,noinsert",
-				},
-				mapping = cmp.mapping.preset.insert({
-					-- Enter key confirms completion item
-					["<CR>"] = cmp.mapping.confirm({ select = false }),
-
-					-- Ctrl + space triggers LSP completion menu
-					["<C-Space>"] = cmp.mapping.complete(),
-				}),
-				snippet = {
-					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
-					end,
-				},
+			-- Base capabilities for every server (blink.cmp powers completion)
+			vim.lsp.config("*", {
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
 			})
 
-			-- Keymaps
+			-- Keymaps (set per-buffer on attach)
 			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("UserLsp", {}),
 				callback = function(event)
 					local opts = { buffer = event.buf }
-
 					vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
 					vim.keymap.set("n", "gh", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
 				end,
@@ -118,49 +92,64 @@ require("lazy").setup({
 		end,
 	},
 
-	-- Formatting with none-ls
+	-- Formatting with conform.nvim
 	{
-		"jay-babu/mason-null-ls.nvim", -- For auto-installing formatters/linters through Mason
-		dependencies = {
-			"mason-org/mason.nvim",
-			{
-				"nvimtools/none-ls.nvim",
-				dependencies = { "nvim-lua/plenary.nvim" },
-				config = function()
-					local null_ls = require("null-ls")
-					local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-					null_ls.setup({
-						sources = {
-							null_ls.builtins.formatting.prettierd.with({
-								extra_filetypes = { "astro", "svelte" },
-							}),
-							null_ls.builtins.formatting.black,
-							null_ls.builtins.formatting.stylua,
-							null_ls.builtins.formatting.gofmt,
-						},
-						on_attach = function(client, bufnr)
-							if client:supports_method("textDocument/formatting") then
-								vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-								vim.api.nvim_create_autocmd("BufWritePre", {
-									group = augroup,
-									buffer = bufnr,
-									callback = function()
-										vim.lsp.buf.format({
-											async = false,
-											filter = function(client)
-												return client.name == "null-ls"
-											end,
-										})
-									end,
-								})
-							end
-						end,
-					})
-				end,
+		"stevearc/conform.nvim",
+		event = "BufWritePre",
+		cmd = "ConformInfo",
+		opts = {
+			formatters_by_ft = {
+				javascript = { "prettierd" },
+				typescript = { "prettierd" },
+				javascriptreact = { "prettierd" },
+				typescriptreact = { "prettierd" },
+				svelte = { "prettierd" },
+				astro = { "prettierd" },
+				css = { "prettierd" },
+				html = { "prettierd" },
+				json = { "prettierd" },
+				yaml = { "prettierd" },
+				markdown = { "prettierd" },
+				python = { "black" },
+				lua = { "stylua" },
+				go = { "gofmt" },
+			},
+			format_on_save = {
+				timeout_ms = 500,
+				lsp_format = "fallback", -- use LSP formatting if no conform formatter is configured
 			},
 		},
+		init = function()
+			-- Use conform for `gq` and similar formatting operations
+			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+		end,
+	},
+
+	-- Auto-install and update LSPs, formatters, and linters via Mason
+	{
+		"whoissethdaniel/mason-tool-installer.nvim",
+		dependencies = {
+			"mason-org/mason.nvim",
+			"mason-org/mason-lspconfig.nvim",
+		},
 		opts = {
-			automatic_installation = true,
+			ensure_installed = {
+				-- LSPs
+				"ts_ls",
+				"svelte",
+				"astro",
+				"tailwindcss",
+				"emmet_ls",
+				"pyright",
+				"gopls",
+				"eslint",
+
+				-- Formatters
+				"prettierd",
+				"black",
+				"stylua",
+			},
+			auto_update = true,
 		},
 	},
 
@@ -197,6 +186,7 @@ require("lazy").setup({
 				manual = true,
 				silent = true,
 				filter = function(bufnr)
+					-- Disable in .env files
 					if vim.endswith(vim.api.nvim_buf_get_name(bufnr), ".env") then
 						return false
 					end
@@ -226,16 +216,17 @@ require("lazy").setup({
 				neocodeium.accept_line()
 			end)
 
-			-- Close nvim-cmp when NeoCodeium completions are displayed
+			-- Close blink.cmp when NeoCodeium completions are displayed
 			vim.api.nvim_create_autocmd("User", {
 				pattern = "NeoCodeiumCompletionDisplayed",
 				callback = function()
-					require("cmp").abort()
+					require("blink.cmp").cancel()
 				end,
 			})
 		end,
 	},
 
+	-- AI agent integration
 	{
 		"NickvanDyke/opencode.nvim",
 		dependencies = {
