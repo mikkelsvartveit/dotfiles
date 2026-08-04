@@ -189,22 +189,14 @@ fish_add_path "$HOME/.local/bin"
 fish_add_path "$HOME/.local/bin/nvim-macos-arm64/bin" # Neovim
 fish_add_path "/opt/homebrew/bin" # Homebrew packages
 fish_add_path "$HOME/.bun/bin" # Bun
-fish_add_path "$HOME/Library/pnpm" # pnpm
+fish_add_path "$HOME/Library/pnpm/bin" # pnpm (binary)
+fish_add_path "$HOME/Library/pnpm" # pnpm (packages)
 fish_add_path "$HOME/go/bin" # Go
 fish_add_path "$HOME/.cargo/bin" # Rust
 fish_add_path "$HOME/.codeium/windsurf/bin" # Windsurf
+fish_add_path "$HOME/.opencode/bin" # OpenCode
 fish_add_path "/opt/homebrew/opt/libpq/bin" # libpg (Postgres CLI tools)
 if [ -f "$HOME/Applications/google-cloud-sdk/path.fish.inc" ]; . "$HOME/Applications/google-cloud-sdk/path.fish.inc"; end # Google Cloud SDK
-
-# Initialize pnpm
-set -gx PNPM_HOME "$HOME/Library/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
-end
-
-# bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
 
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
