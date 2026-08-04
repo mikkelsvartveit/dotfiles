@@ -152,7 +152,6 @@ require("lazy").setup({
 				"tailwindcss",
 				"emmet_ls",
 				"pyright",
-				"gopls",
 				"eslint",
 
 				-- Formatters

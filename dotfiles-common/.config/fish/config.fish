@@ -212,10 +212,3 @@ source ~/.orbstack/shell/init2.fish 2>/dev/null || :
 
 # Initialize zoxide
 zoxide init fish --cmd j | source
-
-# pnpm
-set -gx PNPM_HOME "/Users/mikkelsvartveit/Library/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
-end
-# pnpm end
