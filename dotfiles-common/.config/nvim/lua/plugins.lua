@@ -178,7 +178,7 @@ require("lazy").setup({
 	},
 
 	-- Auto-match brackets, quotes etc.
-	{ "nvim-mini/mini.pairs", opts = {}, version = "*" },
+	{ "windwp/nvim-autopairs", opts = {}, event = "InsertEnter" },
 
 	-- AI autocompletion
 	{
