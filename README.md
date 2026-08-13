@@ -45,7 +45,7 @@ git stash -u
 
 ```bash
 # Install Homebrew packages
-brew install fish tmux git neovim ripgrep tree-sitter-cli zoxide fzf fd lazygit delta orbstack
+brew install fish tmux git gh neovim ripgrep tree-sitter-cli zoxide fzf fd lazygit delta orbstack
 
 # Install pnpm, Node, and Bun
 curl -fsSL https://get.pnpm.io/install.sh | sh -
@@ -56,8 +56,9 @@ curl -fsSL https://bun.com/install | bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 uv python install --default
 
-# Install tpm (tmux package manager)
+# Install tpm (tmux package manager) and plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+~/.tmux/plugins/tpm/bin/install_plugins
 ```
 
 #### Set up fish shell
