@@ -22,10 +22,10 @@ require("lazy").setup({
 		config = function()
 			require("catppuccin").setup({
 				auto_integrations = true,
-				transparent_background = true, -- disables setting the background color.
-				float = {
-					transparent = true, -- enable transparent floating windows
-				},
+				-- transparent_background = true, -- disables setting the background color.
+				-- float = {
+				-- 	transparent = true, -- enable transparent floating windows
+				-- },
 			})
 			vim.cmd("colorscheme catppuccin-mocha")
 		end,
@@ -69,6 +69,9 @@ require("lazy").setup({
 						},
 						documentation = {
 							auto_show = true,
+						},
+						accept = {
+							auto_brackets = { enabled = false },
 						},
 					},
 					keymap = {
@@ -124,6 +127,7 @@ require("lazy").setup({
 				python = { "black" },
 				lua = { "stylua" },
 				go = { "gofmt" },
+				cs = { "csharpier" },
 			},
 			format_on_save = {
 				timeout_ms = 500,
