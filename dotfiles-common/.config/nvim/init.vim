@@ -1,7 +1,7 @@
 " NEOVIM SETTINGS - settings regarding Neovim itself
 
 " Set leader key to comma, since the default sucks for nordic keyboards
-let mapleader = ','
+let mapleader = ' '
 
 " Set UI language to English
 set langmenu=en_US
