@@ -1,5 +1,16 @@
 {
   "permissions": {
-    "defaultMode": "auto"
+    "defaultMode": "auto",
+    "read": {
+      "deny": [
+        "**/.env*",
+        "**/*.pem",
+        "**/*.key",
+        "**/secrets/**",
+        "**/credentials/**",
+        "**/.aws/**",
+        "**/.ssh/**"
+      ]
+    }
   }
 }
