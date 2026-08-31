@@ -6,3 +6,4 @@ font-thicken = true
 adjust-cell-height = 30%
 shell-integration-features = no-cursor
 cursor-style-blink = false
+macos-titlebar-style = tabs
