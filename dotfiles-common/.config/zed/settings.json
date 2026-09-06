@@ -7,64 +7,36 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "agent_servers": {
-    "opencode": {
-      "type": "registry",
-      "favorite_config_option_values": {
-        "model": [
-          "github-copilot/gpt-5.4",
-          "github-copilot/claude-sonnet-4.6"
-        ]
-      }
-    }
+  "agent": {
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "outline_panel": {
+    "dock": "left"
   },
   "project_panel": {
-    "indent_size": 15.0,
-    "starts_open": false,
-    "default_width": 250.0,
+    "dock": "left"
   },
-  "edit_predictions": {
-    "mode": "subtle",
-  },
-  "buffer_font_family": "FiraCode Nerd Font",
-  "agent": {
-    "default_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-5.4-mini",
-      "enable_thinking": false,
-      "effort": "high",
-    },
-    "favorite_models": [
-      {
-        "provider": "copilot_chat",
-        "model": "gpt-5.4-mini",
-        "enable_thinking": false,
-      },
-      {
-        "provider": "copilot_chat",
-        "model": "gpt-5.4",
-        "enable_thinking": false,
-      },
-      {
-        "provider": "copilot_chat",
-        "model": "claude-sonnet-4.6",
-        "enable_thinking": false,
-      },
-    ],
-    "model_parameters": [],
+  "disable_ai": true,
+  "buffer_font_family": ".ZedMono",
+  "soft_wrap": "editor_width",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+    "anthropic_retention": false
   },
   "vim_mode": true,
   "base_keymap": "VSCode",
   "icon_theme": {
     "mode": "system",
     "light": "Zed (Default)",
-    "dark": "Zed (Default)",
+    "dark": "Zed (Default)"
   },
   "ui_font_size": 16,
   "buffer_font_size": 14.0,
-  "theme": {
-    "mode": "system",
-    "light": "One Light",
-    "dark": "One Dark",
-  },
+  "theme": "Catppuccin Mocha (blue)"
 }
