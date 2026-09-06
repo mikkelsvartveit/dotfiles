@@ -6,5 +6,30 @@
       "command": ["npx", "-y", "chrome-devtools-mcp@latest"],
       "enabled": true
     }
+  },
+  "provider": {
+    "sference": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Sference",
+      "options": {
+        "baseURL": "https://api.sference.com/v1"
+      },
+      "models": {
+        "zai-org/GLM-5.3-Flash": {
+          "name": "GLM-5.3-Flash",
+          "variants": {
+            "medium": {
+              "reasoningEffort": "medium"
+            },
+            "high": {
+              "reasoningEffort": "high"
+            },
+            "xhigh": {
+              "reasoningEffort": "xhigh"
+            }
+          }
+        }
+      }
+    }
   }
 }
