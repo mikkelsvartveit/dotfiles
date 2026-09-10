@@ -28,6 +28,7 @@ abbr n "nvim"
 abbr s "ssh"
 abbr t "tmux"
 abbr ta "tmux a"
+abbr tn 'tmux new -s $(pwd | xargs basename)'
 abbr cc "claude"
 abbr oc "opencode"
 abbr occ "opencode --continue"
@@ -42,6 +43,7 @@ abbr ns "npm start"
 abbr nrs "npm run serve"
 abbr nrd "npm run dev"
 abbr nrw "npm run watch"
+abbr py "python"
 abbr venv "source .venv/bin/activate.fish"
 abbr lrr "source venv/bin/activate.fish && litestar run --reload"
 abbr gw "gow -e=go,mod,html run ."
@@ -182,6 +184,24 @@ function mp3combine --description "Combine all MP3 files in the current director
     set -l status_code $status
     rm -f $listfile
     return $status_code
+end
+
+function dotnet-user-secrets --description "Open a .NET project's user-secrets file (Rider-style)"
+    set -l proj $argv[1]
+    test -z "$proj"; and set proj (find . -maxdepth 2 -name '*.csproj' | head -1)
+    test -z "$proj"; and echo "No .csproj found"; and return 1
+
+    set -l id (string replace -rf '.*<UserSecretsId>(.*)</UserSecretsId>.*' '$1' < $proj)
+    if test -z "$id"
+        echo "No UserSecretsId in $proj — run: dotnet user-secrets init --project $proj"
+        return 1
+    end
+
+    set -l dir ~/.microsoft/usersecrets/$id
+    mkdir -p $dir
+    test -f $dir/secrets.json; or printf '{}\n' > $dir/secrets.json
+    echo $dir/secrets.json
+    nvim $dir/secrets.json
 end
 
 # Update PATH
