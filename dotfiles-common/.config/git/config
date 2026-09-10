@@ -12,6 +12,8 @@
 	defaultBranch = main
 [pull]
 	rebase = false
+[includeIf "gitdir:~/Developer/akuna/"]
+	path = ~/Developer/akuna/.gitconfig
 [diff "jupyternotebook"]
 	command = git-nbdiffdriver diff
 [merge "jupyternotebook"]
