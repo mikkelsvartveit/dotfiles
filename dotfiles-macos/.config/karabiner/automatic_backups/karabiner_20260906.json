@@ -80,10 +80,6 @@
                         "vendor_id": 1452
                     },
                     "ignore": false
-                },
-                {
-                    "identifiers": { "is_keyboard": true },
-                    "ignore": false
                 }
             ],
             "name": "Default profile",
