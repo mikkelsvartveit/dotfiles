@@ -1,6 +1,9 @@
 # Disable greeting
 set fish_greeting
 
+# Use vim mode
+fish_vi_key_bindings
+
 # Use short path for prompt
 set theme_short_path yes
 
