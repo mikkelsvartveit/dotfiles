@@ -219,6 +219,7 @@ fish_add_path "$HOME/.cargo/bin" # Rust
 fish_add_path "$HOME/.codeium/windsurf/bin" # Windsurf
 fish_add_path "$HOME/.opencode/bin" # OpenCode
 fish_add_path "/opt/homebrew/opt/libpq/bin" # libpg (Postgres CLI tools)
+fish_add_path "$HOME/.lmstudio/bin" # LM Studio
 if [ -f "$HOME/Applications/google-cloud-sdk/path.fish.inc" ]; . "$HOME/Applications/google-cloud-sdk/path.fish.inc"; end # Google Cloud SDK
 
 # Added by OrbStack: command-line tools and integration
