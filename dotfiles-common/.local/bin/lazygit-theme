@@ -1,0 +1,12 @@
+#!/bin/sh
+# Run lazygit with the Catppuccin flavor matching the current OS appearance.
+# lazygit cannot auto-detect the background inside the terminal, so we ask macOS
+# (via defaults)
+
+flavor=mocha
+if [ "$(uname)" = "Darwin" ]; then
+	[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = "Dark" ] || flavor=latte
+fi
+
+config="$HOME/.config/lazygit"
+exec lazygit --use-config-file="$config/config.yml,$config/catppuccin-$flavor.yml" "$@"
