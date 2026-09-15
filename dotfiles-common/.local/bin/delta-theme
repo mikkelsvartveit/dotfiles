@@ -1,0 +1,8 @@
+#!/bin/sh
+# Run delta with a light/dark flag matching the current OS appearance.
+# delta cannot auto-detect the background inside lazygit's pty, so we ask macOS.
+
+mode=light
+[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = "Dark" ] && mode=dark
+
+exec delta --"$mode" "$@"

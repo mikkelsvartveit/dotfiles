@@ -21,14 +21,39 @@ require("lazy").setup({
 		priority = 1000,
 		config = function()
 			require("catppuccin").setup({
+				flavour = "auto", -- follow vim.o.background
+				background = { -- :h background
+					light = "latte",
+					dark = "mocha",
+				},
 				auto_integrations = true,
 				-- transparent_background = true, -- disables setting the background color.
 				-- float = {
 				-- 	transparent = true, -- enable transparent floating windows
 				-- },
 			})
-			vim.cmd("colorscheme catppuccin-mocha")
+			vim.cmd("colorscheme catppuccin")
+			vim.api.nvim_create_autocmd("OptionSet", {
+				pattern = "background",
+				callback = function()
+					vim.cmd("colorscheme catppuccin")
+				end,
+			})
 		end,
+	},
+
+	-- Follow macOS light/dark appearance
+	{
+		"f-person/auto-dark-mode.nvim",
+		opts = {
+			update_interval = 3000,
+			set_dark_mode = function()
+				vim.o.background = "dark"
+			end,
+			set_light_mode = function()
+				vim.o.background = "light"
+			end,
+		},
 	},
 
 	-- Treesitter config

@@ -1,4 +1,4 @@
-theme = Catppuccin Mocha
+theme = light:Catppuccin Latte,dark:Catppuccin Mocha
 window-padding-x = 6
 font-size = 14
 font-thicken = true

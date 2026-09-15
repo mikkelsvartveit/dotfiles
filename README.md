@@ -45,7 +45,7 @@ git stash -u
 
 ```bash
 # Install Homebrew packages
-brew install fish tmux git gh neovim ripgrep tree-sitter-cli zoxide fzf fd lazygit delta orbstack
+brew install fish tmux git gh neovim ripgrep tree-sitter-cli zoxide fzf fd lazygit delta orbstack cormacrelf/tap/dark-notify
 
 # Install pnpm, Node, and Bun
 curl -fsSL https://get.pnpm.io/install.sh | sh -
@@ -70,3 +70,4 @@ chsh -s $(which fish)
 curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
 omf install https://github.com/jhillyerd/plugin-git
 ```
+
