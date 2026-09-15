@@ -12,5 +12,19 @@
         "**/.ssh/**"
       ]
     }
-  }
+  },
+  "enabledPlugins": {
+    "azure@claude-plugins-official": true,
+    "ponytail@ponytail": true
+  },
+  "extraKnownMarketplaces": {
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    }
+  },
+  "theme": "auto",
+  "model": "claude-fable-5-1[1m]"
 }
