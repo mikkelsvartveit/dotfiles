@@ -127,11 +127,9 @@ require("lazy").setup({
 				python = { "black" },
 				lua = { "stylua" },
 				go = { "gofmt" },
-				cs = { "csharpier" },
 			},
 			format_on_save = {
 				timeout_ms = 500,
-				lsp_format = "fallback", -- use LSP formatting if no conform formatter is configured
 			},
 		},
 		init = function()
