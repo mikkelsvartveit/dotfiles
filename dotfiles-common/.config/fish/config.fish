@@ -19,7 +19,6 @@ alias mcloud-status="mcloud-push --dry-run && mcloud-pull --dry-run"
 alias mcloud-sync="mcloud-push && mcloud-pull"
 alias mcloud-photos-pull="pnpm dlx icloudpd --directory '/Volumes/mcloud/Backup/iCloud Photos (all)/' --username mikkel.svartveit@gmail.com --until-found 100"
 alias mcloud-developer-dump="cd ~/Developer/ && fd --type f --hidden --exclude .git --exclude node_modules | zip -@ /Volumes/mcloud/Backup/Developer/Developer-$(date +%Y-%m-%d).zip"
-alias mcloud-openclaw-dump='set f openclaw-(date +%F).tar.gz; ssh edvin "tar -czf /tmp/$f -C ~ .openclaw"; and scp "edvin:/tmp/$f" "/Volumes/mcloud/Backup/OpenClaw/"; and ssh edvin "rm /tmp/$f"'
 alias zshrc="nvim ~/.zshrc"
 alias fishconfig="cd ~/.config/fish && nvim config.fish && cd -"
 alias nvimconfig="cd ~/.config/nvim && nvim && cd -"
@@ -32,31 +31,25 @@ abbr s "ssh"
 abbr t "tmux"
 abbr ta "tmux a"
 abbr tn 'tmux new -s $(pwd | xargs basename)'
+abbr tl "tmux attach \; choose-tree -Zs"
 abbr cc "claude"
+abbr ccr "claude --resume"
 abbr oc "opencode"
 abbr occ "opencode --continue"
 abbr ocr "opencode run"
-abbr ws "windsurf"
 abbr lg "lazygit"
 abbr p "pnpm"
 abbr pd "pnpm dev"
 abbr pdb "pnpm run db:studio" # Launch Drizzle Studio
-abbr px "pnpm dlx"
-abbr ns "npm start"
-abbr nrs "npm run serve"
-abbr nrd "npm run dev"
-abbr nrw "npm run watch"
 abbr py "python"
 abbr venv "source .venv/bin/activate.fish"
-abbr lrr "source venv/bin/activate.fish && litestar run --reload"
-abbr gw "gow -e=go,mod,html run ."
-abbr mw "make watch"
-abbr x86 "arch -x86_64"
+abbr cvenv "python -m venv .venv"
 abbr nobrew "HOMEBREW_NO_AUTO_UPDATE=1 brew"
 abbr gy "git yield"
 abbr ghv "gh repo view --web"
 abbr pr "gh pr checkout"
 abbr prc "gh pr create --web"
+abbr prv "gh pr view --web"
 abbr caf "caffeinate -d"
 
 # Open a file with macOS Quick Look
@@ -74,10 +67,6 @@ end
 
 function dq
     osascript -e 'quit app "OrbStack"'
-end
-
-function quote
-    string split \n -- $argv | string match -r '\S+' | string replace -r '^(.*)$' '"$1"' | string join ' '
 end
 
 # Function for downloading with wget with staging area
@@ -112,46 +101,6 @@ function dl
 
     # 4. Cleanup: Remove the temp dir
     rm -r "$tmp_dir"
-
-    # 5. Quit tmux session
-    exit
-end
-
-# Function for recursively downloading with wget without ascending to parent directories
-function dlr
-    # 1. Create a unique, hidden temp dir in the current directory
-    set -l tmp_dir (mktemp -d -p . ".wget_staging_XXXXXX")
-
-    # Check if directory creation succeeded
-    if test $status -ne 0
-        echo "Error: Could not create temporary directory."
-        return 1
-    end
-
-    echo "Downloading recursively to hidden staging area: $tmp_dir"
-
-    # 2. Loop through each URL passed as an argument, allowing common separators in one argument
-    set -l urls
-    for arg in $argv
-        set -a urls (string match -ar '[^[:space:],;]+' -- $arg)
-    end
-
-    for url in $urls
-        # Run wget recursively for MKV files without ascending to parent directories
-        if wget -r -np -A mkv --content-disposition --retry-on-http-error=429 -P "$tmp_dir" "$url"
-            # 3. Atomic move to current directory immediately after this specific download finishes
-            # Check if there are files to move to avoid errors if wget succeeded but wrote no file
-            if count "$tmp_dir"/* > /dev/null
-                mv "$tmp_dir"/* .
-                echo "Success: File(s) from $url moved to current directory."
-            end
-        else
-            echo "Error: Download failed for $url."
-        end
-    end
-
-    # 4. Cleanup: Remove the temp dir
-    rm -rf "$tmp_dir"
 
     # 5. Quit tmux session
     exit
