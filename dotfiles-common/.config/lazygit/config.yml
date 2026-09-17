@@ -2,6 +2,8 @@ git:
   pagers:
     - pager: "delta --syntax-theme=ansi --dark --paging=never --line-numbers --tabs 4"
 
+promptToReturnFromSubprocess: false
+
 # Catppuccin Mocha (blue accent) theme: https://github.com/catppuccin/lazygit
 gui:
   theme:
