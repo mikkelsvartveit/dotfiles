@@ -24,6 +24,28 @@
       "models": {
         "zai-org/GLM-5.3-Flash": {
           "name": "GLM-5.3-Flash",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "variants": {
+            "medium": {
+              "reasoningEffort": "medium"
+            },
+            "high": {
+              "reasoningEffort": "high"
+            },
+            "xhigh": {
+              "reasoningEffort": "xhigh"
+            }
+          }
+        },
+        "deepseek-ai/DeepSeek-V4.1-Flash": {
+          "name": "DeepSeek-V4.1-Flash",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
           "variants": {
             "medium": {
               "reasoningEffort": "medium"
