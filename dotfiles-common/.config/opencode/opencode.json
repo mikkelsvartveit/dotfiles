@@ -8,6 +8,12 @@
     }
   },
   "plugin": ["@mohak34/opencode-notifier@latest"],
+  "permission": {
+    "external_directory": {
+      "/tmp/**": "allow",
+      "/private/tmp/**": "allow"
+    }
+  },
   "provider": {
     "sference": {
       "npm": "@ai-sdk/openai-compatible",
