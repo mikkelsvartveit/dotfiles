@@ -1,6 +1,3 @@
-[alias]
-	yield = !git pull --rebase --autostash && git push
-	yolofix = !git commit -v -a --no-edit --amend && git push --force-with-lease
 [user]
 	name = Mikkel Svartveit
 	email = mikkel.svartveit@gmail.com
@@ -12,8 +9,15 @@
 	defaultBranch = main
 [pull]
 	rebase = true
+[alias]
+	yield = !git pull --rebase --autostash && git push
+	yolofix = !git commit -v -a --no-edit --amend && git push --force-with-lease
+
+# Akuna-specific stuff
 [includeIf "gitdir:~/Developer/akuna/"]
 	path = ~/Developer/akuna/.gitconfig
+
+# Better diffing for Jupyter notebooks
 [diff "jupyternotebook"]
 	command = git-nbdiffdriver diff
 [merge "jupyternotebook"]
