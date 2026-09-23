@@ -22,7 +22,7 @@
     "dock": "left"
   },
   "disable_ai": true,
-  "buffer_font_family": ".ZedMono",
+  "buffer_font_family": "JetBrainsMono Nerd Font",
   "soft_wrap": "editor_width",
   "telemetry": {
     "diagnostics": false,
