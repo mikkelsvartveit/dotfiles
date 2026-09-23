@@ -25,6 +25,12 @@
       }
     }
   },
-  "theme": "auto",
-  "model": "claude-fable-5-1[1m]"
+  "pluginConfigs": {
+    "agents-md@builtin": {
+      "options": {
+        "instructionFiles": "claude-md"
+      }
+    }
+  },
+  "theme": "auto"
 }
