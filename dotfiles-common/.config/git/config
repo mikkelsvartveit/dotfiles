@@ -9,6 +9,8 @@
 	defaultBranch = main
 [pull]
 	rebase = true
+[branch]
+	autoSetupMerge = simple
 [alias]
 	yield = !git pull --rebase --autostash && git push
 	yolofix = !git commit -v -a --no-edit --amend && git push --force-with-lease
