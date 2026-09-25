@@ -50,6 +50,7 @@ abbr ghv "gh repo view --web"
 abbr pr "gh pr checkout"
 abbr prc "gh pr create --web"
 abbr prv "gh pr view --web"
+abbr ghs "gh stack"
 abbr caf "caffeinate -d"
 
 # Open a file with macOS Quick Look
