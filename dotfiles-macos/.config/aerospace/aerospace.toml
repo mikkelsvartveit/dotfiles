@@ -46,12 +46,12 @@ automatically-unhide-macos-hidden-apps = true
 
 # See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-    inner.horizontal = 0
-    inner.vertical =   0
-    outer.left =       0
-    outer.bottom =     0
-    outer.top =        0
-    outer.right =      0
+    inner.horizontal = 8
+    inner.vertical =   8
+    outer.left =       8
+    outer.bottom =     8
+    outer.top =        1
+    outer.right =      8
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -145,10 +145,10 @@ automatically-unhide-macos-hidden-apps = true
     alt-w = 'close'
 
     # Full-screen window
-    alt-f = 'fullscreen'
+    alt-cmd-f = 'fullscreen'
 
     # Keybindings for launching apps
-    alt-enter = 'exec-and-forget open -a iTerm'
+    alt-enter = 'exec-and-forget open -a Ghostty'
     alt-shift-f = 'exec-and-forget open -a Finder'
     alt-shift-b = "exec-and-forget open -b $(defaults read ~/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure | awk -F'\"' '/http;/{print window[(NR)-1]}{window[NR]=$2}')" # Open default browser
     alt-shift-o = 'exec-and-forget open -a Craft'
@@ -156,11 +156,10 @@ automatically-unhide-macos-hidden-apps = true
     alt-shift-t = 'exec-and-forget open -a TickTick'
     alt-shift-m = 'exec-and-forget open -a Music'
     alt-shift-p = 'exec-and-forget open -a 1Password'
-    alt-shift-a = 'exec-and-forget open -a ChatGPT'
+    alt-shift-a = 'exec-and-forget open -a Claude'
     alt-shift-ctrl-a = 'exec-and-forget open -a Gemini'
     alt-shift-g = 'exec-and-forget open -a Signal'
-    alt-shift-ctrl-g = 'exec-and-forget open -a "Beeper Desktop"'
-    # alt-shift-cmd-g = 'exec-and-forget open -a Messenger'
+    alt-shift-ctrl-g = 'exec-and-forget open -a Messages'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
