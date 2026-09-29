@@ -5,7 +5,7 @@ config-version = 2
 after-startup-command = []
 
 # Start AeroSpace at login
-start-at-login = false
+start-at-login = true
 
 # Auto-reload config on save
 # auto-reload-config = true
@@ -50,7 +50,7 @@ automatically-unhide-macos-hidden-apps = true
     inner.vertical =   8
     outer.left =       8
     outer.bottom =     8
-    outer.top =        1
+    outer.top =        0
     outer.right =      8
 
 # 'main' binding mode declaration
