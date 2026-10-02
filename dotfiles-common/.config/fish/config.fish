@@ -30,10 +30,11 @@ abbr n "nvim"
 abbr s "ssh"
 abbr t "tmux"
 abbr ta "tmux a"
-abbr tn 'tmux new -s $(pwd | xargs basename)'
 abbr tl "tmux attach \; choose-tree -Zs"
 abbr cc "claude"
 abbr ccr "claude --resume"
+abbr co "codex"
+abbr cor "codex resume"
 abbr oc "opencode"
 abbr occ "opencode --continue"
 abbr ocr "opencode run"
@@ -52,6 +53,14 @@ abbr prc "gh pr create --web"
 abbr prv "gh pr view --web"
 abbr ghs "gh stack"
 abbr caf "caffeinate -d"
+
+function tn --description "Create a new tmux session"
+    set -l name $argv[1]
+    if test -z "$name"
+        set name (pwd | xargs basename)
+    end
+    tmux new -s $name
+end
 
 # Open a file with macOS Quick Look
 function ql
