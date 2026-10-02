@@ -32,12 +32,16 @@ default-root-container-orientation = 'auto'
 # See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
 # See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
 # Fallback value (if you omit the key): on-focused-monitor-changed = []
-on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+# on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
 # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
 # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
 automatically-unhide-macos-hidden-apps = true
+
+# Set workspace 1 to always be on secondary monitor
+[workspace-to-monitor-force-assignment]
+    1 = 'secondary'
 
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
@@ -149,11 +153,13 @@ automatically-unhide-macos-hidden-apps = true
 
     # Keybindings for launching apps
     alt-enter = 'exec-and-forget open -a Ghostty'
+    alt-shift-enter = "exec-and-forget open -b $(defaults read ~/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure | awk -F'\"' '/http;/{print window[(NR)-1]}{window[NR]=$2}')" # Open default browser
     alt-shift-f = 'exec-and-forget open -a Finder'
-    alt-shift-b = "exec-and-forget open -b $(defaults read ~/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure | awk -F'\"' '/http;/{print window[(NR)-1]}{window[NR]=$2}')" # Open default browser
     alt-shift-o = 'exec-and-forget open -a Craft'
     alt-shift-c = 'exec-and-forget open -a Calendar'
     alt-shift-t = 'exec-and-forget open -a TickTick'
+    alt-shift-s = 'exec-and-forget open -a Slack'
+    alt-shift-e = 'exec-and-forget open -a Mail'
     alt-shift-m = 'exec-and-forget open -a Music'
     alt-shift-p = 'exec-and-forget open -a 1Password'
     alt-shift-a = 'exec-and-forget open -a Claude'
@@ -193,6 +199,14 @@ automatically-unhide-macos-hidden-apps = true
 
 [[on-window-detected]]
     if.app-id = 'com.apple.iCal'
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.mail'
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.tinyspeck.slackmacgap'
     run = 'layout floating'
 
 [[on-window-detected]]
