@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pull requests"
+  short_description: "Prepare PRs and open prefilled browser forms"
+  default_prompt: "Use $pr to open a prefilled PR form for the current branch."
