@@ -166,6 +166,7 @@ automatically-unhide-macos-hidden-apps = true
     alt-shift-ctrl-a = 'exec-and-forget open -a Gemini'
     alt-shift-g = 'exec-and-forget open -a Signal'
     alt-shift-ctrl-g = 'exec-and-forget open -a Messages'
+    alt-shift-i = 'exec-and-forget open -a Linear'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
