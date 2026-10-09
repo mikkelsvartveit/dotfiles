@@ -39,6 +39,24 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "Print Screen key on Lofree keyboard: Cmd+Shift+3 -> Ctrl+Cmd+Shift+4 (copy selection to clipboard)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "3",
+                                    "modifiers": { "mandatory": ["command", "shift"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "4",
+                                        "modifiers": ["left_control", "left_command", "left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },
