@@ -63,6 +63,12 @@ nnoremap <C-c> :wa<CR>:qa<CR>
 " Exit Terminal mode with Ctrl+k
 tnoremap <C-k> <C-\><C-n>
 
+" Use ø and æ for paragraph movement ({ and }), easier on nordic keyboards
+nnoremap ø {
+nnoremap æ }
+xnoremap ø {
+xnoremap æ }
+
 " Make yank use system clipboard as default
 nnoremap <expr> y (v:register ==# '"' ? '"+' : '') . 'y'
 nnoremap <expr> yy (v:register ==# '"' ? '"+' : '') . 'yy'

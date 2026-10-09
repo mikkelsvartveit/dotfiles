@@ -46,3 +46,9 @@ nnoremap <leader>p :action GotoFile<CR>
 nnoremap <leader>o :action RecentFiles<CR>
 nnoremap <leader>f :action FindInPath<CR>
 nnoremap <leader>d :action ActivateCommitToolWindow<CR>
+
+" Use ø and æ for paragraph movement ({ and }), easier on nordic keyboards
+nnoremap ø {
+nnoremap æ }
+xnoremap ø {
+xnoremap æ }

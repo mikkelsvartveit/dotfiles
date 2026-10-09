@@ -75,6 +75,12 @@ nnoremap <expr> gP (v:register ==# '"' ? '"+' : '') . 'P'
 xnoremap <expr> gp (v:register ==# '"' ? '"+' : '') . 'p'
 xnoremap <expr> gP (v:register ==# '"' ? '"+' : '') . 'P'
 
+" Use ø and æ for paragraph movement ({ and }), easier on nordic keyboards
+nnoremap ø {
+nnoremap æ }
+xnoremap ø {
+xnoremap æ }
+
 " Type :C to open this config file
 command! -nargs=0 C :e $MYVIMRC
 
