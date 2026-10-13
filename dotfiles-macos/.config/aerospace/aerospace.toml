@@ -129,8 +129,8 @@ automatically-unhide-macos-hidden-apps = true
 
     # Move current workspace to another monitor
     alt-shift-ctrl-1 = 'move-workspace-to-monitor 1'
-    alt-shift-ctrl-2 = 'move-workspace-to-monitor 1'
-    alt-shift-ctrl-3 = 'move-workspace-to-monitor 1'
+    alt-shift-ctrl-2 = 'move-workspace-to-monitor 2'
+    alt-shift-ctrl-3 = 'move-workspace-to-monitor 3'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     alt-tab = 'workspace-back-and-forth'
