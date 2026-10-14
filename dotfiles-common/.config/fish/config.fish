@@ -145,7 +145,7 @@ function mp3combine --description "Combine all MP3 files in the current director
     return $status_code
 end
 
-function dotnet-user-secrets --description "Open a .NET project's user-secrets file (Rider-style)"
+function user-secrets-dotnet --description "Open a .NET project's user-secrets file (Rider-style)"
     set -l proj $argv[1]
     test -z "$proj"; and set proj (find . -maxdepth 2 -name '*.csproj' | head -1)
     test -z "$proj"; and echo "No .csproj found"; and return 1
