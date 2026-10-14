@@ -67,16 +67,13 @@ function ql
     qlmanage -p $argv >/dev/null &
 end
 
-# Start Orbstack and wait to ensure the daemon is ready
+# Start/stop the Colima Docker VM
 function ds
-    echo "Launching Docker Daemon..."
-    open --hide -a "Orbstack"
-    sleep 5
-    echo "Docker daemon started."
+    colima start $argv
 end
 
 function dq
-    osascript -e 'quit app "OrbStack"'
+    colima stop
 end
 
 # Function for downloading with wget with staging area
@@ -180,10 +177,6 @@ fish_add_path "$HOME/.opencode/bin" # OpenCode
 fish_add_path "/opt/homebrew/opt/libpq/bin" # libpg (Postgres CLI tools)
 fish_add_path "$HOME/.lmstudio/bin" # LM Studio
 if [ -f "$HOME/Applications/google-cloud-sdk/path.fish.inc" ]; . "$HOME/Applications/google-cloud-sdk/path.fish.inc"; end # Google Cloud SDK
-
-# Added by OrbStack: command-line tools and integration
-# This won't be added again if you remove it.
-source ~/.orbstack/shell/init2.fish 2>/dev/null || :
 
 # Initialize zoxide
 zoxide init fish --cmd j | source
