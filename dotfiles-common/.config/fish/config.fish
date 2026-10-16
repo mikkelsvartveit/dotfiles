@@ -12,6 +12,9 @@ set -x EDITOR "nvim"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
+# Fix colors in Claude Code when running inside tmux
+set -gx CLAUDE_CODE_TMUX_TRUECOLOR 1
+
 alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
 alias mcloud-push="rsync -auzP --exclude='.*' /Volumes/mcloud/ mcloud:./personal/"
 alias mcloud-pull="rsync -auzP --exclude='.*' mcloud:./personal/ /Volumes/mcloud/"
