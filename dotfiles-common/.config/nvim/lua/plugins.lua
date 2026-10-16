@@ -299,6 +299,7 @@ require("lazy").setup({
 			{ "<leader>c", "<cmd>Telescope commands<CR>", noremap = true, silent = true },
 			{ "<leader>:", "<cmd>Telescope commands<CR>", noremap = true, silent = true },
 			{ "<leader>d", "<cmd>Telescope git_status<CR>", noremap = true, silent = true },
+			{ "<leader>m", "<cmd>Telescope marks<CR>", noremap = true, silent = true },
 			{ "<leader><leader>", "<cmd>Telescope resume<CR>", noremap = true, silent = true },
 			{ "grr", "<cmd>Telescope lsp_references<CR>", noremap = true, silent = true },
 		},
