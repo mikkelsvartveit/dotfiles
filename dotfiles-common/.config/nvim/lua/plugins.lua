@@ -165,6 +165,9 @@ require("lazy").setup({
 		},
 	},
 
+	-- Detect indentation from file contents
+	"tpope/vim-sleuth",
+
 	-- Easy commenting/uncommenting
 	{
 		"numToStr/Comment.nvim",
