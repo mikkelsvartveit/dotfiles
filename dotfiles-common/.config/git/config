@@ -11,6 +11,8 @@
 	rebase = true
 [branch]
 	autoSetupMerge = simple
+[rerere]
+	enabled = true
 [alias]
 	yield = !git pull --rebase --autostash && git push
 	yolofix = !git commit -v -a --no-edit --amend && git push --force-with-lease
