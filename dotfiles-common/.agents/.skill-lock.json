@@ -76,6 +76,24 @@
       "skillFolderHash": "efae5ae14e1ace5f456e895abb9e5643925a754c",
       "installedAt": "2026-09-14T10:36:46.827Z",
       "updatedAt": "2026-09-14T10:36:46.827Z"
+    },
+    "learning-opportunities": {
+      "source": "DrCatHicks/learning-opportunities",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/DrCatHicks/learning-opportunities.git",
+      "skillPath": "learning-opportunities/skills/learning-opportunities/SKILL.md",
+      "skillFolderHash": "82786af7fea058228ded024d9ed997279fdfdb0a",
+      "installedAt": "2026-10-25T11:05:13.988Z",
+      "updatedAt": "2026-10-25T11:06:32.903Z"
+    },
+    "orient": {
+      "source": "DrCatHicks/learning-opportunities",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/DrCatHicks/learning-opportunities.git",
+      "skillPath": "orient/skills/orient/SKILL.md",
+      "skillFolderHash": "a31aa9bdb56c534117ba8ae814f0bf0a9731eee4",
+      "installedAt": "2026-10-25T11:05:13.992Z",
+      "updatedAt": "2026-10-25T11:06:32.905Z"
     }
   },
   "dismissed": {
@@ -87,11 +105,13 @@
     "codex",
     "cursor",
     "droid",
+    "fx",
     "gemini-cli",
     "github-copilot",
     "kilo",
     "kimi-code-cli",
     "opencode",
+    "pi",
     "warp",
     "zed",
     "claude-code"
