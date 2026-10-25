@@ -183,3 +183,7 @@ if [ -f "$HOME/Applications/google-cloud-sdk/path.fish.inc" ]; . "$HOME/Applicat
 
 # Initialize zoxide
 zoxide init fish --cmd j | source
+
+# 1Password SSH agent (for ssh-add and tools that ignore ~/.ssh/config)
+set -l op_sock "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+test -S "$op_sock"; and set -gx SSH_AUTH_SOCK "$op_sock"
