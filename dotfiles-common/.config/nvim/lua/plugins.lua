@@ -380,6 +380,7 @@ require("lazy").setup({
 	-- VSCode-like scrollbar with Git and diagnostic markers
 	{
 		"petertriho/nvim-scrollbar",
+		branch = "v1",
 		config = true,
 	},
 
