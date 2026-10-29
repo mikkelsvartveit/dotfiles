@@ -7,3 +7,4 @@ shell-integration-features = ssh-env,ssh-terminfo
 cursor-style-blink = false
 macos-titlebar-style = tabs
 keybind = shift+enter=text:\n
+auto-update-channel = stable
