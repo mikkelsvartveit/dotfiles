@@ -11,5 +11,8 @@
     "scrollbar": true,
     "thinking": "hide"
   },
+  "tabs": {
+    "mode": "off"
+  },
   "animations": true
 }
