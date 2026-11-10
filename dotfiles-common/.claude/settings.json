@@ -13,10 +13,12 @@
       ]
     }
   },
-  "enabledPlugins": {
-    "azure@claude-plugins-official": true,
-    "ponytail@ponytail": true
+  "env": {
+    "LC_CTYPE": "en_US.UTF-8"
   },
+  "theme": "auto",
+  "model": "opus",
+  "advisorModel": "fable",
   "extraKnownMarketplaces": {
     "ponytail": {
       "source": {
@@ -25,12 +27,15 @@
       }
     }
   },
+  "enabledPlugins": {
+    "azure@claude-plugins-official": false,
+    "ponytail@ponytail": false
+  },
   "pluginConfigs": {
     "agents-md@builtin": {
       "options": {
         "instructionFiles": "claude-md"
       }
     }
-  },
-  "theme": "auto"
+  }
 }
