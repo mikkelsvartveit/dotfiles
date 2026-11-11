@@ -1,17 +1,13 @@
 {
   "permissions": {
     "defaultMode": "auto",
-    "read": {
-      "deny": [
-        "**/.env*",
-        "**/*.pem",
-        "**/*.key",
-        "**/secrets/**",
-        "**/credentials/**",
-        "**/.aws/**",
-        "**/.ssh/**"
-      ]
-    }
+    "deny": [
+      "Read(.env*)",
+      "Read(!.env.example)",
+      "Read(!.env.template)",
+      "Read(~/.microsoft/usersecrets/**)",
+      "Bash(dotnet user-secrets list*)"
+    ]
   },
   "env": {
     "LC_CTYPE": "en_US.UTF-8"
