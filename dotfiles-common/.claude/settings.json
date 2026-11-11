@@ -1,12 +1,19 @@
 {
   "permissions": {
-    "defaultMode": "auto",
-    "deny": [
-      "Read(.env*)",
-      "Read(!.env.example)",
-      "Read(!.env.template)",
-      "Read(~/.microsoft/usersecrets/**)",
-      "Bash(dotnet user-secrets list*)"
+    "defaultMode": "auto"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read|Grep|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$HOME/.claude/hooks/secret-guard.mjs\"",
+            "onFailure": "block"
+          }
+        ]
+      }
     ]
   },
   "env": {
