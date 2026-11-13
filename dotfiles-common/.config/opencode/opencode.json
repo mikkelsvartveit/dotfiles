@@ -7,7 +7,7 @@
       "enabled": true
     }
   },
-  "plugins": ["@mohak34/opencode-notifier@latest", "./plugins/secret-guard"],
+  "plugins": ["@mohak34/opencode-notifier@latest", "./plugins/secret-guard", "-opencode.provider.vllm"],
   "permissions": [
     { "action": "read", "resource": "*.env.template", "effect": "allow" },
     { "action": "external_directory", "resource": "/tmp/*", "effect": "allow" },
