@@ -205,10 +205,6 @@ automatically-unhide-macos-hidden-apps = true
     run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id = 'com.apple.mail'
-    run = 'layout floating'
-
-[[on-window-detected]]
     if.app-id = 'com.microsoft.Outlook'
     run = 'layout floating'
 
