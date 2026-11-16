@@ -11,6 +11,14 @@
     {
       "provider": "codex",
       "model": "gpt-6.1-sol"
+    },
+    {
+      "provider": "opencode",
+      "model": "opencode/deepseek-v4.1-flash-free"
+    },
+    {
+      "provider": "opencode",
+      "model": "opencode/glm-5.3-flash-free"
     }
   ],
   "defaultModelSelection": {
@@ -35,5 +43,16 @@
         "value": "medium"
       }
     ]
+  },
+  "providerInstances": {
+    "codex": {
+      "driver": "codex",
+      "enabled": true
+    },
+    "opencode": {
+      "driver": "opencode",
+      "displayName": "OpenCode",
+      "enabled": true
+    }
   }
 }
