@@ -105,10 +105,16 @@ export default Plugin.define({
       }
     }
 
-    // Transcripts mount and unmount as you switch sessions, so re-scan periodically.
+    // Re-check after every painted frame. The renderer only paints when something changed, so this
+    // costs nothing while idle, and layout is fresh at that point. If padding changes, apply()
+    // requests one more frame, so a resize or session switch shows at most one frame at full width.
     // The walk stops at the transcript, so it only visits the surrounding layout boxes.
+    const renderer = context.renderer as any
+    const onFrame = () => apply()
+    renderer.on("frame", onFrame)
+    // Fallback in case a layout change ever lands without a following frame event.
+    const timer = setInterval(() => apply(), 2000)
     apply(true)
-    const timer = setInterval(() => apply(), 100)
 
     const set = async (patch: Partial<Settings>) => {
       await update((draft: Settings) => Object.assign(draft, patch))
@@ -162,6 +168,7 @@ export default Plugin.define({
 
     return () => {
       clearInterval(timer)
+      renderer.off?.("frame", onFrame)
       // Restore full width when the plugin is disabled or reloaded.
       const found: any[] = []
       try {
