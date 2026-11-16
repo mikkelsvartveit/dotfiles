@@ -70,3 +70,13 @@ chsh -s $(which fish)
 curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
 omf install https://github.com/jhillyerd/plugin-git
 ```
+
+#### Set up OpenCode
+
+```bash
+# Label Claude Agent requests as OpenCode instead of the Agent SDK default, which drains
+# Claude plan usage faster (https://github.com/anomalyco/opencode/issues/61072). Applies to
+# the background server however it is started (TUI, desktop app, desktop app over SSH).
+opencode service set env CLAUDE_CODE_ENTRYPOINT opencode
+opencode service restart
+```
