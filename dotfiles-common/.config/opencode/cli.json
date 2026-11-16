@@ -14,5 +14,11 @@
   "tabs": {
     "mode": "off"
   },
-  "animations": true
+  "animations": true,
+  "plugins": [
+    {
+      "package": "./tui-plugins/narrow-transcript",
+      "options": { "width": 100, "align": "center" }
+    }
+  ]
 }
