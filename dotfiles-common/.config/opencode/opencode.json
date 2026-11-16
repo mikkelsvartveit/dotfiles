@@ -3,8 +3,20 @@
   "mcp": {
     "chrome-devtools": {
       "type": "local",
-      "command": ["npx", "-y", "chrome-devtools-mcp@latest"],
+      "command": ["pnpm", "dlx", "chrome-devtools-mcp@latest"],
       "enabled": true
+    },
+    "servers": {
+      "browse": {
+        "type": "local",
+        "command": [
+          "/Users/mikkelsvartveit/.local/bin/browse",
+          "mcp"
+        ],
+        "environment": {
+          "OPENCODE_BROWSER_RUNTIME": "auto-update"
+        }
+      }
     }
   },
   "plugins": ["@mohak34/opencode-notifier@latest", "./plugins/secret-guard", "-opencode.provider.vllm"],
