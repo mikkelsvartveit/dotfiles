@@ -20,16 +20,20 @@ function toPng(data) {
 function clipboardImage(pb) {
   const urlData = pb.dataForType("public.file-url")
   if (!urlData.isNil()) {
+    // Copied image file (Finder): use the file contents.
     const url = $.NSURL.URLWithString($.NSString.alloc.initWithDataEncoding(urlData, $.NSUTF8StringEncoding))
-    if (url.isNil() || !url.isFileURL) return $()
-    const path = url.path.js
+    const path = !url.isNil() && url.isFileURL ? url.path.js : ""
     const ext = path.split(".").pop().toLowerCase()
-    if (!IMAGE_EXT.includes(ext)) return $()
-    const file = $.NSData.dataWithContentsOfFile(path)
-    return ext === "png" ? file : toPng(file)
+    if (path && IMAGE_EXT.includes(ext)) {
+      const file = $.NSData.dataWithContentsOfFile(path)
+      return ext === "png" ? file : toPng(file)
+    }
   }
+  // Raycast clipboard history puts PNG data next to a file URL, so check PNG
+  // before treating a file URL as "not an image".
   const png = pb.dataForType("public.png")
   if (!png.isNil()) return png
+  if (!urlData.isNil()) return $() // other copied file: its TIFF is just the file icon
   for (const type of ["public.tiff", "public.jpeg", "public.heic", "com.compuserve.gif", "org.webmproject.webp"]) {
     const data = pb.dataForType(type)
     if (!data.isNil()) return toPng(data)
