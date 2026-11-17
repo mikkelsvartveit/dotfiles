@@ -6,6 +6,28 @@
                 "parameters": { "basic.to_if_alone_timeout_milliseconds": 500 },
                 "rules": [
                     {
+                        "description": "Ghostty: Ctrl+V copies clipboard to SSH'd Macs before pasting (image paste in remote TUIs)",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": ["^com\\.mitchellh\\.ghostty$"],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "v",
+                                    "modifiers": {
+                                        "mandatory": ["control"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "~/.config/karabiner/scripts/ssh-clip-paste" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Fix backtick on ISO keyboard",
                         "manipulators": [
                             {

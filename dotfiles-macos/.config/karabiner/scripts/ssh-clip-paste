@@ -1,0 +1,70 @@
+#!/bin/sh
+# Run by Karabiner on Ctrl+V in Ghostty.
+#
+# TUIs running over SSH on a remote Mac (e.g. opencode) read images from the
+# *remote* pasteboard. For every running ssh session into a Mac, copy this
+# Mac's clipboard (image or text) to that Mac's pasteboard, then send Ctrl+V
+# so the TUI pastes it. Non-Mac hosts are detected once (cached) and skipped,
+# so the clipboard is never sent to them.
+
+export LANG=en_US.UTF-8
+here=$(cd "$(dirname "$0")" && pwd)
+cache="$HOME/.cache/ssh-clip-paste" # short path: ControlPath must stay < 104 chars
+mkdir -p -m 700 "$cache"
+ssh_opts="-T -o BatchMode=yes -o ConnectTimeout=3 -o ControlMaster=auto -o ControlPath=$cache/cm-%C -o ControlPersist=30m"
+
+# Print the connection args (options that take a value + destination) of each
+# interactive ssh client, one per line. Flags without values (-t, -A, ...) and
+# the remote command are dropped. Skips our own ssh processes and mux masters.
+ssh_targets() {
+  ps -axww -o args= | awk -v self="$cache" '
+    index($0, self) { next }
+    $1 != "ssh" && $1 !~ /\/ssh$/ { next }
+    {
+      out = ""
+      for (i = 2; i <= NF; i++) {
+        a = $i
+        if (a ~ /^-/) {
+          # Last char of a flag cluster takes a value: -p 22, -oFoo=bar, -tp 22
+          c = substr(a, length(a), 1)
+          if (length(a) == 2 && index("BbcDEeFIiJLlmOoPpQRSWw", c)) { out = out " " a " " $(i + 1); i++ }
+          else if (index("BbcDEeFIiJLlmOoPpQRSWw", substr(a, 2, 1))) out = out " " a
+          continue
+        }
+        print substr(out " " a, 2)
+        break
+      }
+    }' | sort -u
+}
+
+# Exit 0 if the target is a Mac. Caches "Darwin"/other OS forever, connection
+# failures for 10 minutes.
+is_mac() {
+  key="$cache/os-$(printf %s "$1" | shasum | cut -c1-16)"
+  if ! [ -f "$key" ] || { [ "$(cat "$key")" = unreachable ] && [ -z "$(find "$key" -mmin -10)" ]; }; then
+    # shellcheck disable=SC2086
+    os=$(ssh $ssh_opts $1 uname </dev/null 2>/dev/null)
+    [ $? -eq 255 ] && os=unreachable
+    printf '%s\n' "${os:-unknown}" >"$key"
+  fi
+  [ "$(cat "$key")" = Darwin ]
+}
+
+targets=$(ssh_targets | while read -r t; do is_mac "$t" && echo "$t"; done)
+
+if [ -n "$targets" ]; then
+  png="$cache/clip.png"
+  rm -f "$png"
+  kind=$(osascript -l JavaScript "$here/clipboard-png.js" "$png" 2>/dev/null)
+  echo "$targets" | while read -r t; do
+    # shellcheck disable=SC2086
+    if [ "$kind" = image ]; then
+      ssh $ssh_opts $t 'mkdir -p ~/.cache && cat > ~/.cache/ssh-clip.png && osascript -e "set the clipboard to (read file ((path to home folder as text) & \".cache:ssh-clip.png\") as «class PNGf»)" && rm ~/.cache/ssh-clip.png' <"$png"
+    else
+      pbpaste | ssh $ssh_opts $t 'env LANG=en_US.UTF-8 pbcopy'
+    fi
+  done
+  rm -f "$png"
+fi
+
+exec osascript -l JavaScript "$here/send-ctrl-v.js"
