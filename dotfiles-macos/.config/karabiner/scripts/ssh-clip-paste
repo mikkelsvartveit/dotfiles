@@ -11,6 +11,8 @@ export LANG=en_US.UTF-8
 here=$(cd "$(dirname "$0")" && pwd)
 cache="$HOME/.cache/ssh-clip-paste" # short path: ControlPath must stay < 104 chars
 mkdir -p -m 700 "$cache"
+exec 2>"$cache/last-run.log" # trace of the last run, for debugging
+set -x
 ssh_opts="-T -o BatchMode=yes -o ConnectTimeout=3 -o ControlMaster=auto -o ControlPath=$cache/cm-%C -o ControlPersist=30m"
 
 # Print the connection args (options that take a value + destination) of each
@@ -43,7 +45,7 @@ is_mac() {
   key="$cache/os-$(printf %s "$1" | shasum | cut -c1-16)"
   if ! [ -f "$key" ] || { [ "$(cat "$key")" = unreachable ] && [ -z "$(find "$key" -mmin -10)" ]; }; then
     # shellcheck disable=SC2086
-    os=$(ssh $ssh_opts $1 uname </dev/null 2>/dev/null)
+    os=$(ssh $ssh_opts $1 uname </dev/null)
     [ $? -eq 255 ] && os=unreachable
     printf '%s\n' "${os:-unknown}" >"$key"
   fi
