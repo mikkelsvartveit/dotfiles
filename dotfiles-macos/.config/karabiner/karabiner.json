@@ -6,6 +6,51 @@
                 "parameters": { "basic.to_if_alone_timeout_milliseconds": 500 },
                 "rules": [
                     {
+                        "description": "Home/PgUp: volume up, End/PgDn: volume down. With Fn: brightness up/down",
+                        "manipulators": [
+                            {
+                                "from": { "key_code": "home", "modifiers": { "mandatory": ["fn"] } },
+                                "to": [{ "consumer_key_code": "display_brightness_increment" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": { "key_code": "page_up", "modifiers": { "mandatory": ["fn"] } },
+                                "to": [{ "consumer_key_code": "display_brightness_increment" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": { "key_code": "end", "modifiers": { "mandatory": ["fn"] } },
+                                "to": [{ "consumer_key_code": "display_brightness_decrement" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": { "key_code": "page_down", "modifiers": { "mandatory": ["fn"] } },
+                                "to": [{ "consumer_key_code": "display_brightness_decrement" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": { "key_code": "home" },
+                                "to": [{ "consumer_key_code": "volume_increment" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": { "key_code": "page_up" },
+                                "to": [{ "consumer_key_code": "volume_increment" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": { "key_code": "end" },
+                                "to": [{ "consumer_key_code": "volume_decrement" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": { "key_code": "page_down" },
+                                "to": [{ "consumer_key_code": "volume_decrement" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Ghostty: Ctrl+V copies clipboard to SSH'd Macs before pasting (image paste in remote TUIs)",
                         "manipulators": [
                             {
