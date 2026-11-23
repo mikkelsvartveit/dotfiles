@@ -9,16 +9,16 @@
       "model": "claude-fable-5-2"
     },
     {
-      "provider": "codex",
-      "model": "gpt-6.1-sol"
-    },
-    {
       "provider": "opencode",
       "model": "opencode/deepseek-v4.1-flash-free"
     },
     {
       "provider": "opencode",
       "model": "opencode/glm-5.3-flash-free"
+    },
+    {
+      "provider": "codex",
+      "model": "gpt-6.2-sol"
     }
   ],
   "defaultModelSelection": {
@@ -31,9 +31,11 @@
   },
   "defaultRuntimeMode": "auto",
   "projectSettingsFolded": true,
-  "idleCompaction": "onReturn",
+  "compactIdleThreads": true,
+  "idleCompaction": "beforeCacheExpires",
   "autoResumeLimitedThreads": true,
   "promptSuggestionsEnabled": true,
+  "sidebarAutoSettleOnMerge": false,
   "textGenerationModelSelection": {
     "instanceId": "claudeAgent",
     "model": "claude-haiku-5-5",
@@ -47,12 +49,20 @@
   "providerInstances": {
     "codex": {
       "driver": "codex",
+      "displayName": "Codex",
       "enabled": true
     },
     "opencode": {
       "driver": "opencode",
       "displayName": "OpenCode",
       "enabled": true
+    },
+    "claudeAgent": {
+      "driver": "claudeAgent",
+      "displayName": "Claude",
+      "config": {
+        "idleCompaction": "off"
+      }
     }
   }
 }
